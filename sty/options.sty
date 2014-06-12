@@ -1,0 +1,88 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%																																					 %%%
+%%%  options.sty																														 %%%
+%%%																																					 %%%
+%%%  Contains various flags for conditional compilation.										 %%%
+%%%  It needs to be loaded before packages.sty & macros.sty.								 %%%
+%%%																																					 %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Normally, the next line should be mandatory
+% but it crates compilation problems.
+%\ProvidesPackage{options}
+
+% NOTES:
+%
+% Flags are boolean and can be either true or false. For each flag uncomment
+% the line that has the desired value and comment out the value that you do not
+% want.  
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%
+%%% User-defined flags
+%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Put your own flags here.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%
+%%% Predefined high-level flags
+%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Flag that controls, whether the document is a review draft or final draft.
+% Setting it to false will disable:
+% 1) line numbers dispayed next to lines
+% 2) in-document comments created by the \mycomment macro(s)
+% 3) labels and citation keys printed verbatim within the document
+\newif\ifMakeReviewDraft
+%\MakeReviewDrafttrue
+\MakeReviewDraftfalse
+
+% Flag that controls, whether document links should be displayed in color 
+% or not.
+\newif\ifUseColorLinks
+\UseColorLinkstrue
+%\UseColorLinksfalse
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%
+%%% Predefined low-level flags
+%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Flag that controls the display of in-document comments placed using the 
+% \mycomment macro(s).
+\newif\ifDisplayMyComments
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%
+%%% Setting of low-level flags via high-level flags; do not modify this section
+%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%\ifMakeReviewDraft
+%	% Generate a document for review purposes
+%
+%	% Enable the display of comments 
+	\DisplayMyCommentstrue
+%	
+%\else
+%	% Generate a ``final'' version of the document
+%
+%	% Disable the display of comments
+%	\DisplayMyCommentsfalse 
+%
+%\fi

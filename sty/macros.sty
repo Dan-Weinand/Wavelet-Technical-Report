@@ -1,0 +1,159 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%																																					 %%%
+%%%  macros.sty																															 %%%
+%%%																																					 %%%
+%%%  Loads various user-defined macros and definitions.											 %%%
+%%%  It needs to be loaded after options.sty & packages.sty.								 %%%
+%%%																																					 %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Normally, the next line should be mandatory
+% but it crates compilation problems.
+%\ProvidesPackage{macros}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%
+%%% Sepcify correct hyphenations of words; feel free to add your own.
+%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Correct bad hyphenation here; the ones shown below is an example
+\hyphenation{op-tical net-works semi-conduc-tor IEEEtran}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%
+%%% Various fixed settings and macros; do not change.
+%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%
+%%% Various color definitions; feel free to add your own.
+%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Requires the color package
+\definecolor{gray}{rgb}{0.5,0.5,0.5}	% it requires the color package
+\definecolor{red}{rgb}{1.0,0.0,0.0}	  % it requires the color package
+\definecolor{green}{rgb}{0.0,1.0,0.0}	  % it requires the color package
+\definecolor{blue}{rgb}{0.0,0.0,1.0}	  % it requires the color package
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%
+%%% Text substitution macros; feel free to add your own.
+%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\FIT}{Florida Institute of Technology}
+\newcommand{\ECE}{Department of Electrical \& Computer Engineering} 
+
+% Macros for "i.e." and "e.g.". To prevent LaTeX from adding space after the 
+% last period, use these macros as ``\ie\'' and ``\eg\''.
+\newcommand{\ie}{\textit{i.e.}}
+\newcommand{\eg}{\textit{e.g.}}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%
+%%% Acronym definitions; feel free to add your own.
+%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Acronyms (requires ``acronym'' package in packages.sty)
+% Use ``\ac{<ACRONYM>}'' in the text to refer to an acronym. The first time 
+% LaTeX will encounter it, it will expand it to its full text and the acronym in 
+% parentheses. After that point, if it encounters it again, it will just write 
+% out the acronym.
+%
+% Use ``\acfi{<ACRONYM>}'' in the same was as ``\ac'', but the expanded acronym 
+% will be in italics.
+%
+% Use ``\acl{<ACRONYM>}'' to printout its expanded version without the acronym 
+% in parentheses. 
+%
+% Use ``\acp{<ACRONYM>}'' to printout the plural form of the acronym.
+%
+% Use ``\acresetall'' to reset the ``memory'' of the acronym package. After its 
+% occurence, LaTeX behaves as if it encounters an acronym for the first time in 
+% the text.  
+%
+% Read the documentation, if you need acronyms in titles or a list of acronyms.
+
+\newacro{MKL}{Multiple Kernel Learning}
+\newacro{MTL}{Multi-Task Learning}
+\newacro{MT-MKL}{Multi-Task MKL}
+\newacro{SVM}{Support Vector Machine}
+\newacro{RKHS}{Reproducing Kernel Hilbert Space}
+\newacro{MM}{Majorization-Minimization}
+\newacro{KKT}{Karush-Kuhn-Tucker}
+\newacro{KNN}{$k$-nearest neighbor}
+\newacro{PSD}{Proximal Subgradient Descent}
+\newacro{DML}{Distance Metric Learning}
+\newacro{R2LML}[R\textsuperscript{2}LML]{Reduced-Rank Local Metric Learning}
+\newacro{NSF}{National Science Foundation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%
+%%% Referencing macros; do not change.
+%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\eref}[1]{Eq.~(\ref{#1})}%{Equation~(\ref{#1})}
+\newcommand{\fref}[1]{Figure~\ref{#1}}
+\newcommand{\tref}[1]{Table~\ref{#1}}
+\newcommand{\sref}[1]{Section~\ref{#1}}
+\newcommand{\apref}[1]{Appendix~\ref{#1}}
+\newcommand{\aref}[1]{Algorithm~\ref{#1}}
+\newcommand{\pref}[1]{Problem~(\ref{#1})}
+\newcommand{\propref}[1]{Proposition~\ref{#1}}
+\newcommand{\thmref}[1]{Theorem~\ref{#1}}
+\newcommand{\lemmaref}[1]{Lemma~\ref{#1}}
+\newcommand{\colref}[1]{Corollary~\ref{#1}}
+% Remind user about the aformentioned macros
+\typeout{}
+\typeout{======================================================}
+\typeout{REMINDER:}
+\typeout{Use the macros \noexpand\sref, \noexpand\eref, \noexpand\fref, \noexpand\tref and} \typeout{}
+\typeout{\noexpand\aref in yout text to refer to sections, equations,}
+\typeout{}
+\typeout{figures, tables and algorithms respectively.}
+\typeout{}
+\typeout{Example: \noexpand\sref{<section label>}}
+\typeout{}
+\typeout{======================================================}
+\typeout{}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%
+%%% Commenting macros; feel free to add your own.
+%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ifDisplayMyComments
+
+	% This is a helper macro for document review purposes
+	\newcommand{\gcacomment}[1] { \noindent {\small \textcolor{red}{\textbf{GCA:} \emph{#1} } } }
+\else
+
+	% Eliminate comments
+	\newcommand{\gcacomment}[1] {}
+
+\fi
+
+
+

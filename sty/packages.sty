@@ -1,0 +1,283 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%																																					 %%%
+%%%  packages.sty																														 %%%
+%%%																																					 %%%
+%%%  Loads various packages.																								 %%%
+%%%  It needs to be loaded after options.sty and before macros.sty.					 %%%
+%%%																																					 %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Normally, the next line should be mandatory
+% but it crates compilation problems.
+%\ProvidesPackage{packages}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%
+%%% Graphics-related packages
+%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Allows inclusion of images in the document.
+% See http://www.tug.org/texlive/Contents/live/texmf-dist/doc/latex/graphics/graphicx.pdf
+\usepackage{graphicx}
+
+% Set the graphics path for all images that will be imported.
+\graphicspath{{./figures/}}
+
+% Allows on-the-fly conversion of EPS figures to PDF.
+% Needs to be loaded after the graphic{s,x} packages.
+% Also, in order to make it work, you need to appropriately configure your
+% LaTeX editor. For example, TexnicCenter needs to be configured as follows:
+% Under Build | Define Output Profiles, in the arguments you pass to the 
+% LaTeX command line compiler, append the following string: 
+%  --shell-escape --synctex=1 
+% See http://ctan.org/tex-archive/macros/latex/contrib/oberdiek/epstopdf.pdf
+\usepackage{epstopdf}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%
+%%% Algorithm-related packages
+%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% To be used for describing algorithms
+% See http://www.ctan.org/tex-archive/macros/latex/contrib/algorithms/
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+% Produce C++ styled comments
+\renewcommand{\algorithmiccomment}[1]{\textcolor{gray}{\emph{// #1}}} 					
+
+% Packages hyperref and algorithmic misbehave sometimes.  We can fix
+% this with the following command. ICML 2013 recommendation.
+%\newcommand{\theHalgorithm}{\arabic{algorithm}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%
+%%% Math-related packages
+%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Among many other useful things, it allows use of \boldsymbol for 
+% vectors and matrices.
+% See ftp://ftp.ams.org/pub/tex/doc/amsmath/amsldoc.pdf
+\let\proof\relax
+\let\endproof\relax
+\usepackage{amsmath}
+
+% Provides additional mathematical fonts. For example, it provides 
+% blackboard symbols via \mathfbb{}.
+% It is a superset of amsfonts.sty.
+% See http://carroll.aset.psu.edu/pub/CTAN/fonts/amsfonts/doc/amssymb.pdf
+\usepackage{amssymb}
+
+% Provides enhanced an \newtheorem command and proof environment.  
+% Must be loaded after amsmath.sty
+% See ftp://ftp.ams.org/ams/doc/amscls/amsthdoc.pdf
+\usepackage{amsthm}
+% Theorem: An idea that has been demonstrated as true or is assumed to be so 
+% demonstrable.
+\newtheorem{thm}{Theorem}
+% Corollary: A proposition that follows with little or no proof required from 
+% one already proven.
+\newtheorem{cor}{Corollary}
+% Lemma: A subsidiary proposition assumed to be valid and used to demonstrate 
+% a principal proposition.
+\newtheorem{lem}[thm]{Lemma}
+% Proposition: Connotes a statement with a simple proof, or a basic consequence 
+% of a definition that needs to be stated, but is obvious enough to require no
+% proof. 
+\newtheorem{prop}{Proposition}
+
+
+% Extra (exotic?) mathematical symbols.
+% See http://www.tex.ac.uk/tex-archive/fonts/stmaryrd/stmaryrd.pdf
+%\usepackage{stmaryrd}
+
+% Even more exotic math symbols.
+% If you use fonts of this package, you may have problems embedding the
+% right font into the PDF document; this is a problem, when submitting
+% to publishers (like IEEE).
+% See http://www.tex.ac.uk/tex-archive/fonts/mathabx/mathtest.pdf
+%\usepackage{mathabx}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%
+%%% Review-related packages
+%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% If the document is prepared for review, include the following packages:
+\ifMakeReviewDraft
+
+	% Prints labels and citation keys verbatim within the document.
+	% It may be useful for LaTeX ``debugging''.
+	% See http://tug.ctan.org/tex-archive/macros/latex/required/tools/showkeys.pdf
+	\usepackage{showkeys}
+
+	% Prints out line numbers next to each line.
+	% See http://www.ctan.org/tex-archive/macros/latex/contrib/lineno/ulineno.pdf
+	%\usepackage{lineno}
+	
+\fi
+
+
+% Provides hyphen-atable letter spacing (space-out), underlining and some
+% derivatives such as overstriking and highlighting.
+% See http://get-software.net/macros/latex/contrib/soul/soul.pdf
+\usepackage{soul}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%
+%%% Float-related packages
+%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Allows to create better quality tables and provides guidelines.
+% See http://www.ctan.org/tex-archive/macros/latex/contrib/booktabs/booktabs.pdf
+\usepackage{booktabs}
+
+% Allows tables to flow over page boundaries.
+% See http://ctan.math.utah.edu/ctan/tex-archive/macros/latex/required/tools/longtable.pdf
+%\usepackage{longtable}
+
+% Handles subfigures
+% See ftp://ftp.dante.de/tex-archive/macros/latex/contrib/caption/subcaption.pdf
+\usepackage{subcaption}
+
+% Handles subfigures.
+% See http://ftp.twaren.net/Unix/TeX/CTAN/obsolete/macros/latex/contrib/subfigure/subfigure.pdf
+%\usepackage{subfigure}
+
+% Allows more control over float placements, definition of new ``floats'', etc. 
+% See http://mirror.unl.edu/ctan/macros/latex/contrib/float/float.pdf
+%\usepackage{float}
+
+% Provides the \FloatBarrier command beyond which floats may not pass.
+% See http://mirror.its.uidaho.edu/pub/tex-archive/macros/latex/contrib/placeins/placeins-doc.pdf
+\usepackage{placeins}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%
+%%% Miscellaneous packages
+%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Provides among other things the "comment" environment.
+% See http://mirrors.ibiblio.org/pub/mirrors/CTAN/macros/latex/required/tools/verbatim.pdf
+\usepackage{verbatim}					
+
+% Handles acronyms. 
+% See http://mirror.math.ku.edu/tex-archive/macros/latex/contrib/acronym/acronym.pdf
+\usepackage{acronym}
+
+% Allow the use for colored font
+\usepackage{color}
+
+% Provides dummy/filler text
+% See http://ftp.math.purdue.edu/mirrors/ctan.org/macros/latex/contrib/lipsum/lipsum.pdf
+\usepackage{lipsum}
+
+% Allows to print out date and time 
+% See http://solar.physics.montana.edu/kankel/ph567/resources/LaTeX/add-ons/datetime.pdf
+%\usepackage{datetime}
+%\shortdate
+%\settimeformat{ampmtime}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%
+%%% Link-related packages
+%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Provides some intelligence in line breaking, when handling email addresses, 
+% hypertext links, directories/paths, etc., which normally have no spaces.
+% See http://mirror.its.uidaho.edu/pub/tex-archive/macros/latex/contrib/url/url.pdf
+\usepackage{url}
+
+
+% As of 2011, we use the hyperref package to produce hyperlinks in the
+% resulting PDF.  If this breaks your system, please commend out the
+% following usepackage line and replace \usepackage{icml2013} with
+% \usepackage[nohyperref]{icml2013} above. ICML 2013 specific.
+
+
+% It is important for it to be the last package loaded.
+% See http://www.tug.org/applications/hyperref/ftp/doc/manual.pdf
+% Note: In case you get the ``\pdfendlink ended up in different nesting level than \pdfstartlink'' fatal error,
+% this happens when hyperref is used under pdftex and a natbib citation splits across a page boundary. 
+% See http://ftp.tug.org/mail-archives/pdftex/2002-February/002216.html
+% To fix it, note the page number of the error and use the following instead:
+%\usepackage[draft]{hyperref}
+\usepackage{hyperref}
+
+
+% Default setup options for ``hyperref'' package
+\hypersetup{
+    pdftitle={AMALTHEA REU Technical Report Template},    % Document title
+    pdfsubject={AMALTHEA REU Technical Report 2013--X},	% Document subject
+    pdfauthor={Jane M. Doe, John M. Smith Jr. and Georgios C. Anagnostopoulos},		% Document author(s)
+    pdfkeywords={Adaptive Resonance Theory, Evolutionary Algorithm, Memetic Algorithms, Multi-Objective Optimization, Simulated Annealing},	% List of keywords
+    pdfcreator={LaTeX 2e},	% Creator - DO NOT CHANGE
+    pdfproducer={AMALTHEA REU Program},	% Producer - DO NOT CHANGE
+    plainpages=false,			%  DO NOT CHANGE
+    unicode=false,				% non-Latin characters in Acrobat's bookmarks
+    pdftoolbar=true,			% show Acrobat's toolbar?
+    pdfmenubar=true,			% show Acrobat's menu?
+    pdffitwindow=false,		% window fit to page when opened
+    pdfstartview={FitH},	% fits the width of the page to the window
+    pdfnewwindow=true,		% links in new window
+    colorlinks=true				% false: boxed links; true: colored links - DO NOT CHANGE
+}
+% Determine whether ``hyperref'' should use color links or not.
+\ifUseColorLinks
+
+	% Use colors for hyperlinks
+	\hypersetup{
+	    linkcolor=blue,			% color of internal links
+    	citecolor=green,		% color of links to bibliography
+    	filecolor=magenta,	% color of file links
+    	urlcolor=cyan				% color of external links
+	}
+
+\else
+
+	% Use black color for all hyperlinks
+	\hypersetup{
+	    linkcolor=black,		% color of internal links
+    	citecolor=black,		% color of links to bibliography
+    	filecolor=black,		% color of file links
+    	urlcolor=black			% color of external links
+	}
+
+\fi
+
+
+% This package tries a solution of the problem with hyperref, that links
+% to floats points below the caption and not at the beginning of the float.
+% If you are using the subfig package make sure you have a recent version 
+% of the caption package from CTAN (subfig uses caption). Otherwise references 
+%to subfigures can go wrong.
+% See ftp://ftp.tex.ac.uk/tex-archive/macros/latex/contrib/oberdiek/hypcap.pdf
+%\usepackage[all]{hypcap}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%
+%%% DO NOT LOAD ANY PACKAGES AFTER HYPERREF!
+%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

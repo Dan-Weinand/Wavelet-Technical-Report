@@ -1,0 +1,1067 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass spie
+\begin_preamble
+
+\end_preamble
+\use_default_options true
+\master TechReportAMALTHEA.lyx
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle empty
+\tracking_changes true
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\author -2130722577 "dweinand" 
+\end_header
+
+\begin_body
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+In the present information economy, the colossal amounts of data generated
+ daily has spawned the need for real-time data driven analysis algorithms
+ that require minimal user influence.
+ Density estimation is one path to extracting actionable intelligence from
+ data, and wavelets serve as the building blocks on which this data-driven
+ framework will be built.
+ The goal of this project is to develop a computational implementation of
+ this wavelet density estimation framework and showcase its utility on a
+ desirable application.
+ In the following report, we begin with a background of wavelet theory and
+ density estimation, then describe the computational framework involved
+ in this process.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+This is a good start, make this sound better.
+ Flavor it with your msg.
+ Make sure to mention that the focus is to get up to three dimensions so
+ the section labels will make sense.
+ Include the steps you will take, meaning 1D matlab and then 1D web and
+ so on.
+
+\change_deleted -2130722577 1402579351
+ 
+\change_unchanged
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Wavelets:
+\end_layout
+
+\begin_layout Standard
+A wavelet is a function with an average value of zero and typically a finite
+ support
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Gargour09"
+
+\end_inset
+
+.
+ One of the simplest examples of such a function is the Haar wavelet developed
+ by Alfred Haar in 1909, which is defined as 
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Formula $f(x)=\begin{cases}
++1 & 0\leq x<\frac{1}{2}\\
+-1 & \frac{1}{2}\leq x<1\\
+0 & otherwise
+\end{cases}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+An essential feature of this wavelet is that the inner product of the wavelet
+ and any integer shift of the wavelet is equal to zero.
+ In other words, the Haar wavelet is orthogonal under translation, a feature
+ it shares with the other major wavelet families such as the Daubechies
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Be sure to insert a space in between a word and the reference.
+ 
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Burrus97"
+
+\end_inset
+
+.
+ Another important component of these particular types of wavelets is that
+ they may have their support split in half while maintaining orthogonality
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Burrus97"
+
+\end_inset
+
+.
+ This puts them in the class of so called 
+\begin_inset Quotes eld
+\end_inset
+
+dyadic
+\begin_inset Quotes erd
+\end_inset
+
+ wavelets which can be repeatedly halved in size in order to better approximate
+ a function, allowing them to be used in multi-resolution analysis.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Wavelet section a bit short.
+ Talk about wavelets being a basis for the 
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ function space.
+ Should be a paragraph, describe what an 
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ functions looks like.
+ Then do a paragraph on multi-resolution analysis.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+The Wavelet Series Expansion:
+\end_layout
+
+\begin_layout Standard
+In real life, there is a large class of signals with components varying
+ in both time and frequency.
+ When using a Fourier transform on these kinds of signals, this local variation
+ in the signal can be lost 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Gargour09"
+
+\end_inset
+
+.
+ One way to overcome this difficulty is to use the Short-time Fourier Transform,
+ which applies the Fourier transform to
+\change_deleted -2130722577 1402579351
+ 
+\change_unchanged
+ successive finite portions of the data.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Gargour09"
+
+\end_inset
+
+.
+ An alternative is to use the wavelet transform which, instead of decomposing
+ a signal into a series of sinusoidal waves, decomposes the waves into a
+ sum of wavelets 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Burrus97"
+
+\end_inset
+
+.
+ The wavelet transform is widely used in signal processing when the signal
+ of interest has locally important information.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Talk about why wavelets are better than the fourier series with the amount
+ of basis functions needed to capture sharp transitions.
+ Talk about the advantage of having a compact support for wavelets.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Approximating a function 
+\begin_inset Formula $f(t)$
+\end_inset
+
+ is done through the use of scaling basis functions (
+\begin_inset Formula $\phi$
+\end_inset
+
+) which capture the average value of the function by a combination of scaling
+ and translation of the basis functions.
+ If we let 
+\begin_inset Formula $j$
+\end_inset
+
+ be the resolution of our approximation and 
+\begin_inset Formula $k$
+\end_inset
+
+ be the integer translation then the scaling basis functions may be defined
+ by
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+If you reference the scaling basis functions make sure you use 
+\begin_inset Formula $\phi$
+\end_inset
+
+ and the resolution 
+\begin_inset Formula $j_{0}.$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\phi_{j_{0},k}(t)=2^{j/2}\phi(2^{j}t-k)\label{eq:Def of scaling function}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Wavelet basis functions (
+\begin_inset Formula $\psi$
+\end_inset
+
+) complement scaling basis functions by capturing sharp jumps in 
+\begin_inset Formula $f(t)$
+\end_inset
+
+.
+ The essentials of this technique can be summarized with the equation
+\end_layout
+
+\begin_layout LyX-Code
+\begin_inset Formula 
+\begin{equation}
+f(t)=\sum_{k}\alpha_{j_{0},k}\phi_{j_{0},k}(t)+\sum_{j_{0}\leq j}\sum_{k}\beta_{j,k}\psi_{j,k}(t)\label{eq:Wavelet series approx}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The remaining question is how to calculate the 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta$
+\end_inset
+
+ coefficients.
+ Since the wavelets we work with form an orthogonal basis for
+\begin_inset Formula $L^{2}(\mathbb{R})$
+\end_inset
+
+ or the set of square integrable functions, the coefficients may be readily
+ obtained via the inner product of the function with the relevant scaling
+ basis or wavelet basis functions
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Heil89"
+
+\end_inset
+
+.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Put an example with subscrips 
+\begin_inset Formula $j$
+\end_inset
+
+ and or 
+\begin_inset Formula $j_{0}$
+\end_inset
+
+ so the reader can see what is going on.
+ 
+\end_layout
+
+\end_inset
+
+ This lets us approximate the function to an arbitrarily fine degree of
+ accuracy by varying 
+\begin_inset Formula $j$
+\end_inset
+
+.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Put all the subscripts in math notation, it will remain consistent with
+ the equations.
+\end_layout
+
+\end_inset
+
+ For practical purposes, exactly describing the original signal using a
+ very high resolution is not necessary.
+ In fact, the coefficients of the highest resolution wavelets are almost
+ always dominated by noise so, when used in signal processing, thresholding
+ the wavelets at a lower resolution improves the signal to noise ratio.
+\end_layout
+
+\begin_layout Standard
+When actually computing the 
+\begin_inset Formula $\beta$
+\end_inset
+
+ coefficients it is possible to start with the scaling basis function for
+ the 
+\begin_inset Formula $j$
+\end_inset
+
+ corresponding to the highest resolution, and then applying a high-pass
+ filter to this function we may obtain both the scaling basis function and
+ the wavelet basis function for the next highest resolution
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Burrus97"
+
+\end_inset
+
+.
+ In this manner it is possible to recursively compute all of the coefficients
+ using a bank of filters.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Maybe put in what a filter bank is.
+ Make this point a bit more clear or state that this is a way of interpreting
+ the generation of coefficients.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+(Parametric) Density Estimation:
+\end_layout
+
+\begin_layout Standard
+At its core, density estimation attempts to approximate the probability
+ density distribution
+\change_deleted -2130722577 1402579351
+ 
+\change_unchanged
+ that produces a particular random variable.
+ This is a vitally important component in describing a set of data, as a
+ density estimate is a readily visualized and understood statistical measure
+ which provides a large quantity of information about the data studied
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Silverman86"
+
+\end_inset
+
+.
+
+\change_deleted -2130722577 1402579351
+ 
+\change_unchanged
+ Though important, determining how to approximate the unknown distribution
+ can be difficult
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Sentence structure weird, use the however to start the next sentence.
+ 
+\end_layout
+
+\end_inset
+
+.
+ Broadly speaking, we can divide the approaches to tackling this challenge
+ into parametric and nonparametric models.
+\end_layout
+
+\begin_layout Standard
+The parametric modeling paradigm assumes the data comes from some set type
+ of distribution (commonly a Gaussian).
+ From there, finding the best fitting parameters using maximum likelihood
+ estimation is typically straightforward
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Cramer46"
+
+\end_inset
+
+.
+ The parametric approach is effective when there is a certain amount of
+ prior knowledge regarding the distribution of the data being studied, however,
+ when the distribution of the data is truly unknown we would prefer not
+ to force our model into a certain class of distributions.
+\end_layout
+
+\begin_layout Subsection*
+Nonparametric Density Estimation:
+\end_layout
+
+\begin_layout Standard
+In contrast to parametric models, non-parametric models limit the assumptions
+ which are made about the data's true distribution function.
+ Typically they have a parameter which controls the smoothing of the density
+ estimate.
+ Regardless of the model type selected, determining how much to smooth the
+ estimate is an extremely important question.
+\end_layout
+
+\begin_layout Standard
+Histograms are arguably the simplest nonparametric density estimator.
+ The essential idea is to segment one dimensional data into a series of
+ 'bins' of a given width and then assign the data into the bin which it
+ falls.
+ Then the histogram is constructed by creating a series of rectangles with
+ width of the bin size and whose height is proportional to the number of
+ samples which fall into the bin.
+ The size of the bin determines the amount of smoothing to perform.
+ Large bins are insensitive to both noise and fluctuations in the density.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Remember to center the images, and go to the settings and click 'Here definitely
+'.
+ This will be ok since it is a tech report.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+
+\change_inserted -2130722577 1402579457
+\begin_inset Graphics
+	filename figures/normHist15.png
+	lyxscale 35
+	scale 30
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename figures/normHist24.png
+	lyxscale 35
+	scale 30
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename figures/normHist60.png
+	lyxscale 35
+	scale 30
+
+\end_inset
+
+
+\change_unchanged
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Histograms for normal data with: 15, 24 and 60 bins
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A potential downside for histograms is their discontinuous nature.
+ While it is possible that the true density function is discontinuous, we
+ generally expect a smoother generating function.
+ Kernel estimators are one nonparametric density estimator which solves
+ this problem by giving us a smooth estimate.
+ The basic idea of kernel estimators can be described by the equation below
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+\hat{f}_{h}(x) & = & \frac{1}{nh}\underset{i=1}{\overset{n}{\sum}}K(x-x_{i})
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Give a sentence or two on what a kernel is.
+ 
+\end_layout
+
+\end_inset
+
+In the above equation, 
+\begin_inset Formula $K(*)$
+\end_inset
+
+ is the kernel.
+ A kernel is a function which determines the relative weight to give to
+ a sample.
+ Typical kernels are symmetric, integrate to one, and are non-zero.
+ Examples include the uniform kernel defined as 
+\begin_inset Formula $K(u)=\frac{1}{2}1_{\{|u|\leq1\}}$
+\end_inset
+
+ and the Gaussian kernel defined by 
+\begin_inset Formula $K(u)=\frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}u^{2}}$
+\end_inset
+
+.
+ Typically a Gaussian kernel is used, although other kernels may sometimes
+ be appropriate.
+ The parameter 
+\begin_inset Formula $h$
+\end_inset
+
+ controls the neighborhood size to be used in the kernel estimate, and thus
+ determines the smoothing.
+ A large 
+\begin_inset Formula $h$
+\end_inset
+
+ works like a large bin size, decreasing noise sensitivity and reducing
+ the responsiveness to local changes in the distribution function.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Fix images like above.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/normKern4.png
+	lyxscale 35
+	scale 30
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename figures/normKern10.png
+	lyxscale 35
+	scale 30
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename figures/normKern40.png
+	lyxscale 35
+	scale 30
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Kernel density estimates for normal data with h = .4, 1, and 4
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Orthogonal Series as Density Estimators:
+\end_layout
+
+\begin_layout Standard
+The class of orthogonal series estimators is typically associated with the
+ Fourier series, which approximates data with a series of sinusoidal waves.
+ As touched upon previously, the Fourier transform and other estimators
+ based on global basis functions are unable to capture local aspects of
+ the data distribution.
+ Wavelet estimators, on the other hand, excel at representing local features
+ such as discontinuities
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Vannucci95"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+In order to find the wavelet series expansion for a density function, we
+ must compute the coefficients for its basis functions.
+ In order to compute these coefficients, it is useful to note that a density
+ function is by definition square integrable since the total probability
+ must be one and the function is never negative.
+ This puts density functions into 
+\begin_inset Formula $L^{2}(\mathbb{R})$
+\end_inset
+
+, which implies that they may be expressed as a sum of orthogonal basis
+ functions of the form:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+f(x)=\sum\limits _{j}b_{j}\psi_{j}(x),\quad j\in J
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In this case, 
+\begin_inset Formula $J$
+\end_inset
+
+ consists of the resolution levels of the basis functions.
+ The exact value of 
+\begin_inset Formula $b_{j}=\left\langle f,b_{j}\right\rangle $
+\end_inset
+
+.
+ While 
+\begin_inset Formula $f(x)$
+\end_inset
+
+ is not known, Cencov
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Cencov62"
+
+\end_inset
+
+ describes how to use the expectation of 
+\begin_inset Formula $\psi$
+\end_inset
+
+ to approximate 
+\begin_inset Formula $b_{j}$
+\end_inset
+
+ as
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\hat{b}_{j}=\int\psi_{j}(x)f(x)dx=E[\psi_{j}(x)]\approx\frac{1}{n}\sum\limits _{i=0}^{n}\psi_{j}(X_{i})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Once the coefficients are known, the estimate of the corresponding density
+ can be readily calculated as
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\hat{f}(x)=\sum\limits _{j}b_{j}\psi_{j}(x)\label{eq:Wavelet density}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+These orthogonal series estimates, while possessing many beneficial properties
+ in density estimation such as expressing local trends and allowing for
+ limited support, do not generally produce proper probability density functions.
+ At times this is acceptable as we are chiefly interested in the shape of
+ the distribution rather than the actual probability in an interval but
+ there are times when negative probabilities in a region may be more problematic.
+ The author's of 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Gajek86"
+
+\end_inset
+
+ describes an iterative algorithm which forces a density estimator to give
+ true probability density functions.
+ Convergence is rapid so generally a small number of iterations suffice
+ to give a function which both resembles the estimate from the wavelet transform
+ and acts as a proper density function.
+\end_layout
+
+\begin_layout Standard
+A major difficulty in creating a good approximation of the true density
+ is selecting the resolution level 
+\begin_inset Formula $j$
+\end_inset
+
+.
+ Higher resolutions give a density distribution which is more responsive
+ to local fluctuations but which is also more susceptible to noise.
+ The ideal resolution balances these two constraints by smoothing out noise
+ without losing features of the density distribution.
+ A generalized cross validation method for wavelet resolution thresholding
+ applicable to the case of stationary density distributions has been developed
+ which operates in O(n) time for each resolution to compare
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Jansen95"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection*
+Data Streams:
+\end_layout
+
+\begin_layout Standard
+Ordinarily, data is considered to be gathered at one point in time and then
+ analyzed at another.
+ In this fixed static data paradigm, we have complete access to the entirety
+ of the data set to analyze together.
+ Furthermore, the amount of data in the set is ordinarily sufficiently small
+ to analyze together without major computational difficulties occurring.
+ In contrast, when analyzing a data stream it is frequently desirable to
+ take new data points into the model as they arrive in real time using online
+ processing.
+ The total data set can be unwieldy in size, so typically only a subset
+ is analyzed at a given point in time.
+ Data streams thus present difficulties both in terms of memory management
+ owing to their potentially unlimited size and algorithmic efficiency since
+ a new estimate must be ready before the next set of data comes in.
+ Wegman and Caudle 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Wegman06"
+
+\end_inset
+
+ describe a recursive method of updating the wavelet coefficients for a
+ density estimate with computation time scaling linearly with the number
+ of samples read from the stream and 
+\begin_inset Formula $O(1)$
+\end_inset
+
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Should this be 
+\begin_inset Formula $O(n)$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+ memory requirements.
+ The constant memory requirement comes from the algorithm's single use of
+ a given data sample.
+ As a result, the only values which need to be stored long-term are the
+ coefficients for the wavelet functions, which is a constant amount of memory.
+\end_layout
+
+\begin_layout Standard
+In addition to the above complexities, data streams bring up the question
+ of whether we should view the distribution function as stationary 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Silverman86"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Vannucci95"
+
+\end_inset
+
+, or non-stationary
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Wegman06"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Trevino12"
+
+\end_inset
+
+.
+ Put another way, data streams let us consider whether or not the distribution
+ of data might change over time.
+ In order to capture the temporally local nature of the non-stationary distribut
+ion, it is necessary to somehow discount older samples versus new samples
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Wegman06"
+
+\end_inset
+
+.
+ Wegman and Caudle (2006) addressed this problem via a parameter 
+\begin_inset Formula $\theta$
+\end_inset
+
+ which controls the speed with which the wavelet coefficients decay.
+ Roughly speaking, this is an exponential discounting scheme where a larger
+ 
+\begin_inset Formula $\theta$
+\end_inset
+
+ produces a more precise density function and a smaller 
+\begin_inset Formula $\theta$
+\end_inset
+
+ creates a model more sensitive to local changes in the density function.
+ In contrast to this smooth discounting scheme, García-Treviño and Barria
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Trevino12"
+
+\end_inset
+
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+avoid putting in the dates when referencing and insert the reference after
+ the persons name.
+ This reference is not in the bibfile.
+ Please put it in.
+\end_layout
+
+\end_inset
+
+ describe a discontinuous scheme using a sliding window of 
+\begin_inset Formula $\omega$
+\end_inset
+
+ samples to calculate the coefficients for both scaling and wavelet functions.
+ Similarly to Wegman and Caudle's 
+\begin_inset Formula $\theta$
+\end_inset
+
+, 
+\begin_inset Formula $\omega$
+\end_inset
+
+ gives precise answers when large and is sensitive to local changes when
+ small.
+ The advantages claimed 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+just use the reference, not their names at this point
+\end_layout
+
+\end_inset
+
+ for the windowing technique are chiefly computational speed and the capability
+ to give equal weight to all data points in a region of time.
+ The coefficient update equations for the two methods moving from time step
+ 
+\begin_inset Formula $n$
+\end_inset
+
+ to step 
+\begin_inset Formula $n+1$
+\end_inset
+
+ are given below.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\hat{b}_{j,n+1}=\theta\hat{b}_{j,n}+(1-\theta)\varphi_{j}(X_{n+1})\quad j,n\in\mathbb{N}\label{eq:Decay Update}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\hat{b}_{j,n+1}=\hat{b}_{j,n}+\frac{\varphi_{j}(X_{n+1})}{\omega}-\frac{\varphi_{j}(X_{n-\omega+1})}{\omega}\quad j,n\in\mathbb{N}\label{eq:Window update}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

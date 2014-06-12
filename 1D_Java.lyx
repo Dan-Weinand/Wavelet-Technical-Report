@@ -1,0 +1,945 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass spie
+\use_default_options true
+\master TechReportAMALTHEA.lyx
+\begin_modules
+eqs-within-sections
+figs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement tph
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes true
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\author 236236747 "mmoyou" 
+\end_header
+
+\begin_body
+
+\begin_layout Section
+1-Dimensional Java Applet
+\end_layout
+
+\begin_layout Subsection
+Architecture
+\end_layout
+
+\begin_layout Standard
+
+\change_deleted 236236747 1402423856
+The next step in the deployment phase is an implementation of the 1D wavelet
+ densit
+\change_inserted 236236747 1402423950
+With the 1D Matlab implementation explained, the next phase of the project
+ is to implement 1D wavelet framework in a Java applet.
+ In order to accomplish this we provide an overarching outline
+\change_deleted 236236747 1402423956
+A rough outline 
+\change_unchanged
+of the necessary tasks which the code 
+\change_deleted 236236747 1402423968
+performs 
+\change_inserted 236236747 1402423974
+needs to perform
+\change_deleted 236236747 1402423976
+can be seen below.
+\change_inserted 236236747 1402424011
+, shown in Fig.
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Java-applet-architecture"
+
+\end_inset
+
+.
+ 
+\change_unchanged
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename figures/JavaLayout.png
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Java applet architecture
+\change_inserted 236236747 1402423998
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Java-applet-architecture"
+
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+These different functionalities were divided up among classes as was thought
+ logical.
+\change_deleted 236236747 1402424161
+
+\end_layout
+
+\begin_layout Standard
+
+\change_inserted 236236747 1402424165
+A
+\change_deleted 236236747 1402424162
+A
+\change_unchanged
+ll code is freely available on Github via 
+\change_inserted 236236747 1402424182
+this 
+\change_deleted 236236747 1402424213
+https://github.com/Dan-Weinand/DensityEstimation1D
+\change_inserted 236236747 1402424324
+
+\begin_inset CommandInset href
+LatexCommand href
+name "link"
+target "https://github.com/Dan-Weinand/DensityEstimation1D"
+
+\end_inset
+
+.
+ 
+\change_unchanged
+
+\end_layout
+
+\begin_layout Subsubsection
+Settings
+\end_layout
+
+\begin_layout Standard
+This class acts as a wrapper for all of the user specified values.
+\change_inserted 236236747 1402425030
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted 236236747 1402425224
+Make a list of the settings and a brief description of each one.
+ This can be the same text that is available in the documentation.
+ 
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+ When the user selects a wavelet type, resolution, etc using the GUI
+\change_inserted 236236747 1402424507
+,
+\change_unchanged
+ this automatically updates the appropriate values in this class.
+ All fields are public and so may be accessed by any other class.
+\end_layout
+
+\begin_layout Subsubsection
+EstimatorGUI
+\end_layout
+
+\begin_layout Standard
+This class forms the actual display for the density estimator.
+ Normally, it has a simple toolbar (with 'Start', 'Pause', 'Reset', and
+ 'Settings') at 
+\change_inserted 236236747 1402425982
+the 
+\change_unchanged
+top and most of the space is devoted to
+\change_deleted 236236747 1402425990
+ a
+\change_unchanged
+ plot for the probability density function estimate.
+ Settings may only be edited once the estimating process has been stopped.
+ Selecting settings will open up the SettingsUI.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/EstimatorDisplay.png
+	lyxscale 70
+	scale 70
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Density Estimation Display
+\change_inserted 236236747 1402426488
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Density-Estimation-Display"
+
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The actual display of the plot uses the GRAL (GRAphing Library) Java package,
+ from 
+\change_deleted 236236747 1402426514
+http://trac.erichseifert.de/gral/
+\change_inserted 236236747 1402426515
+
+\begin_inset CommandInset href
+LatexCommand href
+target "http://trac.erichseifert.de/gral/"
+
+\end_inset
+
+
+\change_unchanged
+ The plot supports zooming and scrolling while the estimation process is
+ paused.
+ One advantage of the GRAL package is that their plots are implemented with
+ data listeners
+\change_inserted 236236747 1402426795
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted 236236747 1402426814
+What advantage does this give
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+.
+ In essence, when the table
+\change_inserted 236236747 1402426819
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted 236236747 1402426840
+Can you mention that the density is stored in a table previous to this
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+ corresponding to the density at each point in the domain is updated, its
+ plot is automatically updated.
+ Pausing and unpausing can be done freely during the density estimation
+ process.
+ During density estimation, the current index of the sample being evaluated
+ is displayed above the plot so that the current progress is known
+\change_inserted 236236747 1402426913
+ as shown in Fig 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Density-Estimation-Display"
+
+\end_inset
+
+
+\change_unchanged
+.
+\end_layout
+
+\begin_layout Subsubsection
+Transform
+\end_layout
+
+\begin_layout Standard
+This class wraps the coefficients and translates.
+ It has no further functionality.
+\end_layout
+
+\begin_layout Subsubsection
+Wavelet
+\end_layout
+
+\begin_layout Standard
+This class performs the functionality of a wavelet.
+ We operate under the assumption that the data point has already been scaled
+ and translated as appropriate for the corresponding wavelet's resolution
+ and translation.
+\end_layout
+
+\begin_layout Standard
+Initializing a wavelet loads the proper table of 
+\change_deleted 236236747 1402426962
+phi
+\change_inserted 236236747 1402426965
+
+\begin_inset Formula $\phi$
+\end_inset
+
+
+\change_unchanged
+ and 
+\change_deleted 236236747 1402426980
+psi 
+\change_inserted 236236747 1402426986
+
+\begin_inset Formula $\psi$
+\end_inset
+
+
+\change_deleted 236236747 1402426992
+va
+\change_inserted 236236747 1402426995
+va
+\change_unchanged
+lues from csv files.
+ Once initialized, the inSupport function determines whether or not an incoming
+ data point is supported by the wavelet.
+ Furthermore, the supports methods to return the value of 
+\change_inserted 236236747 1402427017
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted 236236747 1402427025
+change to symbols
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+psi and phi at a given point in its support.
+ Interpolation between values in the support is done linearly.
+\change_inserted 236236747 1402427032
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted 236236747 1402427059
+Mention a blurb about cubic in higher dimensions if you think it is necessary.
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\begin_layout Subsubsection
+DensityHelper
+\end_layout
+
+\begin_layout Standard
+This class performs the bulk of the actual density estimation algorithm.
+ It is responsible for initializing and updating the coefficients appropriately,
+ and creating a normalized density estimate when one is requested.
+ The current implementation is loop based and we are exploring whether vectoriza
+tion would offer significant speedup
+\change_inserted 236236747 1402427125
+s
+\change_unchanged
+.
+\end_layout
+
+\begin_layout Standard
+First, the valid translates given the resolution, density domain, and wavelet
+ type used are calculated (initializeTranslates method).
+ Next the coefficients for both the scaling basis functions and wavelet
+ basis functions must be initialized to zero (initializeCoefficients).
+ 
+\end_layout
+
+\begin_layout Standard
+During the actual online density estimation process, (updateCoefficients).
+ In order to save computational time, only those coefficients whose support
+ actually contains the incoming data point are updated in accordance with
+ the recursive updating procedure outlined by 
+\change_inserted 236236747 1402427182
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted 236236747 1402427185
+update
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+García-Treviño and Barria 2012.
+ Once the coefficients are computed, the unnormalized density is calculated
+ in getDensity followed by normalization.
+ Normalization is performed iteratively according to the algorithm proposed
+ by 
+\change_inserted 236236747 1402427208
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted 236236747 1402427213
+include reference
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+Leslaw Gajek 1986 in the function normalizeDensity.
+\end_layout
+
+\begin_layout Subsubsection
+SettingsUI
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/SettingsDisplay.png
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Settings User Interface
+\change_inserted 236236747 1402427225
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Settings-User-Interface"
+
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This class allows the end user to easily select the parameters controlling
+ the density estimation process.
+ Settings include: wavelet family, wavelet order, resolution, aging method
+ (and window size if windowing is used or 
+\begin_inset Formula $\theta$
+\end_inset
+
+ if exponential aging is used), density domain, whether wavelets are to
+ be used, and the frequency with which to update the plot.
+ It also allows the user to select a data file of their own to upload and
+ use.
+
+\change_inserted 236236747 1402427271
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted 236236747 1402427295
+Either do a short bulleted list or reference the documentation section created
+ previously.
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\begin_layout Subsubsection
+DensityRunner
+\end_layout
+
+\begin_layout Standard
+The density estimator is built using JAVA Swing components.
+ It turns out that all Swing applications have a single thread, called the
+ 
+\begin_inset Formula $event$
+\end_inset
+
+ 
+\begin_inset Formula $dispatch$
+\end_inset
+
+ 
+\begin_inset Formula $thread$
+\end_inset
+
+, that manages all interactions with the application's GUI components.
+ All tasks that require interaction with an application's GUI are placed
+ in an 
+\begin_inset Formula $event$
+\end_inset
+
+ 
+\begin_inset Formula $queue$
+\end_inset
+
+ and are executed sequentially by the event dispatch thread.
+ Performing intensive calculations while simultaneously updating GUI components
+ can tie up the event dispatch thread in the calculations and consequently
+ make the application to become unresponsive.
+ The solution to this issue is to perform all intensive computations in
+ a separate thread, usually referred to as the 
+\begin_inset Formula $worker$
+\end_inset
+
+ 
+\begin_inset Formula $thread$
+\end_inset
+
+, and let the event dispatch thread update the GUI components based on the
+ results obtained from this worker thread.
+ 
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Formula $DensityRunner$
+\end_inset
+
+ extends the JAVA SwingWorker class and is a separate thread that performs
+ all the calculations related to density estimation.
+ Once enough results are available for the plot update, the DensityRunner
+ delegates the plot updating task to the event dispatch thread.
+ Splitting the tasks between the DensityRunner thread and the event dispatch
+ thread in this fashion allows the application to stay responsive at all
+ times and to rapidly respond to user interactions such as stopping, resuming,
+ and resetting the density estimator.
+\end_layout
+
+\begin_layout Standard
+In a nutshell, the DensityRunner is responsible for reading sample data
+ from the user-provided sample data file, calculating and updating the coefficie
+nts of the wavelet functions, updating the density function, and making
+ the event dispatch thread update the density plot at the user-defined frequency.
+\end_layout
+
+\begin_layout Subsection
+Optimization
+\end_layout
+
+\begin_layout Standard
+The computational bottleneck in the Matlab code was the actual density estimatio
+n once the coefficients were known.
+ With this in mind, we are setting the default update frequency in the applet
+ to read more samples between updates to the plot.
+ Even without this modification, the unoptimized Java code already ran significa
+ntly more quickly than the Matlab implementation.
+ An early time trial gave a rate of 1 million samples every four and a half
+ minutes.
+ Settings were as follows: data drawn from a normal distribution (mean 0
+ and standard deviation 1), resolution level of 2, density range -3.5 to
+ 3.5, discretization of .01, wavelet type Daubechies 6, update frequency 2000
+ samples, using a window size 1400 aging, and run on an Intel Core 2.8GHz
+ processor.
+\end_layout
+
+\begin_layout Standard
+An early concern was memory management when working with large files.
+ In order to address this concern, a BufferedReader was used along with
+ a single array storing the window of old samples.
+ This should keep the marginal memory requirements of the algorithm linear
+ with respect to the window size selected and independent of the size of
+ the data file being used.
+ Memory will most likely not be a concern, however, as a data file with
+ upwards of 100 million samples could be entirely read into working memory
+ without issue.
+\change_inserted 236236747 1402427485
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted 236236747 1402427493
+Sentence is a bit confusing.
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\begin_layout Subsection
+Recommendations for Use
+\end_layout
+
+\begin_layout Subsubsection
+Data sets
+\end_layout
+
+\begin_layout Standard
+The current default settings work well for normalized data but are not necessari
+ly limited to such data sets.
+ However, if non-normalized data is to be used, we strongly recommend that
+ the density domain setting be edited in order to properly accommodate the
+ data being used.
+\end_layout
+
+\begin_layout Subsubsection
+Selecting a resolution level
+\change_inserted 236236747 1402427601
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted 236236747 1402427617
+Be consistent with the capitals in the titles.
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\begin_layout Standard
+The resolution to select is arguably the most important parameter.
+ Higher resolutions give a density distribution which is more responsive
+ to local fluctuations but which is also more susceptible to noise.
+ See 
+\change_inserted 236236747 1402427576
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted 236236747 1402427582
+updatate refs
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+Jansen, Malfait, and Bultheel 1995 for a generalized cross validation method
+ for wavelet resolution thresholding in the case of stationary density distribut
+ions.
+ Rigorously theoretically grounded methods for optimizing the resolution
+ given a non-stationary distribution have not been proposed to the extent
+ of our knowledge.
+\end_layout
+
+\begin_layout Subsubsection
+Deciding how to age the data
+\end_layout
+
+\begin_layout Standard
+Many data sets are stationary with respect to their distribution function.
+ It is typically a good idea to consider whether or not it makes sense to
+ look at the data as non-stationary before trying to optimize aging parameters.
+ Assuming the data is non-stationary, an important consideration is how
+ to implement aging.
+ If exponential aging like that proposed by 
+\change_inserted 236236747 1402427639
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted 236236747 1402427640
+refs
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+Caudle and Wegman 2009 is used, the optimal value of 
+\begin_inset Formula $\theta$
+\end_inset
+
+ needs to be found.
+ As discussed by
+\change_inserted 236236747 1402427652
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted 236236747 1402427653
+refs 
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+ García-Treviño and Barria 2012, selecting the optimal 
+\begin_inset Formula $\theta$
+\end_inset
+
+ can be an exceedingly difficult process
+\change_inserted 236236747 1402427663
+ and
+\change_unchanged
+ rather opaque to the end user.
+ In general, increasing 
+\begin_inset Formula $\theta$
+\end_inset
+
+ reduces the model's sensitivity to noise and local changes in the underlying
+ density function while decreasing the parameter has the reverse effect.
+ While a value of 
+\begin_inset Formula $\theta$
+\end_inset
+
+ near .999 has seen some success empirically, it is difficult to understand
+ how much to modify the parameter in order fine tune the estimate's sensitivity
+ to both noise and local changes in the nature of the distribution function.
+ In contrast, using the sliding window approach generally feels much more
+ intuitive.
+ Since the technique simply uses a sliding average of 
+\begin_inset Formula $\omega$
+\end_inset
+
+ samples, the user may pick how many samples to average at a time and the
+ tradeoff between noise insensitivity versus rapid adjustment to changes
+ in the distribution function is fairly straightforward.
+ Based on this, we recommend the sliding window approach unless there is
+ a clear-cut reason for using exponential discounting.
+\end_layout
+
+\begin_layout Subsubsection
+Other considerations
+\end_layout
+
+\begin_layout Standard
+Enabling wavelets at a stopping resolution level of 
+\change_deleted 236236747 1402427717
+J
+\change_inserted 236236747 1402427718
+
+\begin_inset Formula $J$
+\end_inset
+
+
+\change_unchanged
+ is exactly equivalent to disabling wavelets at a starting resolution of
+ 
+\change_deleted 236236747 1402427726
+(J + 1)
+\change_inserted 236236747 1402427746
+
+\begin_inset Formula $(J+1)$
+\end_inset
+
+
+\change_unchanged
+ in terms of the density distribution function.
+ The wavelet type and order to be selected are relatively unimportant in
+ actually finding the density estimate, although a general rule is that
+ higher orders of a given wavelet family will give smoother estimates.
+ If wavelets are to be used, make sure to select a wavelet type which is
+ dyadic in nature (the Daubechies, Symlet or Coiflet wavelets are all dyadic).
+\end_layout
+
+\begin_layout Standard
+There are several factors which influence the speed of the density estimation
+ process.
+ The discretization level determines how well the plot shown demonstrates
+ the actual calculated density distribution.
+ Reducing the level will increase the speed of the algorithm but may result
+ in a plot which appears to be somewhat piece-wise linear and jagged.
+ The update frequency influences the algorithm's speed both by determining
+ how often the plot is visually updating (repainting the plot can easily
+ begin to dominate computation for very frequent updates) and how often
+ the density must be updated.
+ Broadly speaking, if speed is a concern one should update as rarely as
+ feasible.
+ Finally, higher order wavelets have larger tables defined and thus computing
+ 
+\begin_inset Formula $\phi$
+\end_inset
+
+ and 
+\begin_inset Formula $\psi$
+\end_inset
+
+ will take longer to interpolate.
+ For this reason mid-range Daubechies wavelets are recommended as generally
+ a good balance between smoothness and speed.
+\end_layout
+
+\end_body
+\end_document
