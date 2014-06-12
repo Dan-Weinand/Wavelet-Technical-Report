@@ -122,17 +122,6 @@ Calculate Valid translates
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Talk about why having valid translates are better and what you gain when
- you go to higher dimensions.
- 
-\end_layout
-
-\end_inset
-
 The dyadic Discrete Wavelet Transform (DWT) assumes wavelet functions (father
  and mother) of the form:
 \begin_inset Formula 
@@ -231,26 +220,9 @@ Estimate Coefficients
 \end_layout
 
 \begin_layout Standard
-The bulk of the coding complexity falls into this section.
- 
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-Remind the reader about the coefficients and even reference the old equation.
- This may be difficult because it was in another file, if it cannot be done
- just copy and paste the 
-\begin_inset Formula $f(x)$
-\end_inset
-
- expansion equation.
- Oh and make sure you label your equations
-\end_layout
-
-\end_inset
-
-All the coefficients are initialized at zero and then begin to build up
- from there as described in equation (
+The bulk of the coding complexity falls into this section.All the coefficients
+ are initialized at zero and then begin to build up from there as described
+ in equation (
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:Decay Update"
@@ -270,17 +242,6 @@ reference "eq:Window update"
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Trevino12"
-
-\end_inset
-
-
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-remove date and add in the reference, same with Caudle.
- 
-\end_layout
 
 \end_inset
 
@@ -349,29 +310,37 @@ The decaying method of Caudle and Wegman likewise lends itself well to a
 \end_layout
 
 \begin_layout Standard
-It is worth noting that for the majority of the wavelets used in estimation,
- no closed form approximation exists.
+In both of the recursive updating schemes, it is not necessary to actually
+ calculate 
+\begin_inset Formula $\varphi_{j,k}(X_{n+1})$
+\end_inset
+
+ for many of the basis functions.
+ This is since whenever 
+\begin_inset Formula $X_{n+1}$
+\end_inset
+
+ falls outside of the support of the function, 
+\begin_inset Formula $\varphi_{j,k}(X_{n+1})$
+\end_inset
+
+ is guaranteed to be equal to zero.
+ Thus, by simply checking whether or not a point is supported by a basis
+ function before evaluating it we save significant amounts of computation
+ time.
+ It is also worth noting that for the majority of the wavelets used in estimatio
+n, no closed form approximation exists.
  Due to this, a table of values defining the wavelet over its support is
  pre-emptively calculated for each type of wavelet.
  Then interpolation was used among these values to calculate the output
  of the scaling basis and wavelet basis functions.
- Profiling of the algorithm's performance puts this interpolation as the
- bottleneck where most of computation time is spent.
+ Profiling of the algorithm's performance puts this interpolation (which
+ must be performed here as well as in density calculation) as the bottleneck
+ where most of computation time is spent.
  Depending on the granularity of the wavelet table, linear interpolation
  may give satisfactory results while for more widly spaced tables cubic
  interpolation may be necessary to achieve a good approximation of the interpola
 ted value.
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-Mention this interpolation as a bottleneck and also the discretization and
- the need for cubic interpolation depending on the tables.
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsection

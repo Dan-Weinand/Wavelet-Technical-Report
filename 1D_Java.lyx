@@ -62,7 +62,6 @@ figs-within-sections
 \html_math_output 0
 \html_css_as_file 0
 \html_be_strict false
-\author 236236747 "mmoyou" 
 \end_header
 
 \begin_body
@@ -76,26 +75,10 @@ Architecture
 \end_layout
 
 \begin_layout Standard
-
-\change_deleted 236236747 1402423856
-The next step in the deployment phase is an implementation of the 1D wavelet
- densit
-\change_inserted 236236747 1402423950
 With the 1D Matlab implementation explained, the next phase of the project
  is to implement 1D wavelet framework in a Java applet.
- In order to accomplish this we provide an overarching outline
-\change_deleted 236236747 1402423956
-A rough outline 
-\change_unchanged
-of the necessary tasks which the code 
-\change_deleted 236236747 1402423968
-performs 
-\change_inserted 236236747 1402423974
-needs to perform
-\change_deleted 236236747 1402423976
-can be seen below.
-\change_inserted 236236747 1402424011
-, shown in Fig.
+ In order to accomplish this we provide an overarching outlineof the necessary
+ tasks which the code needs to perform, shown in Fig.
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Java-applet-architecture"
@@ -104,8 +87,6 @@ reference "fig:Java-applet-architecture"
 
 .
  
-\change_unchanged
-
 \end_layout
 
 \begin_layout Standard
@@ -128,8 +109,6 @@ status open
 
 \begin_layout Plain Layout
 Java applet architecture
-\change_inserted 236236747 1402423998
-
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Java-applet-architecture"
@@ -137,16 +116,10 @@ name "fig:Java-applet-architecture"
 \end_inset
 
 
-\change_unchanged
-
 \end_layout
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -157,25 +130,7 @@ name "fig:Java-applet-architecture"
 
 \begin_layout Standard
 These different functionalities were divided up among classes as was thought
- logical.
-\change_deleted 236236747 1402424161
-
-\end_layout
-
-\begin_layout Standard
-
-\change_inserted 236236747 1402424165
-A
-\change_deleted 236236747 1402424162
-A
-\change_unchanged
-ll code is freely available on Github via 
-\change_inserted 236236747 1402424182
-this 
-\change_deleted 236236747 1402424213
-https://github.com/Dan-Weinand/DensityEstimation1D
-\change_inserted 236236747 1402424324
-
+ logical.All code is freely available on Github via this 
 \begin_inset CommandInset href
 LatexCommand href
 name "link"
@@ -185,8 +140,6 @@ target "https://github.com/Dan-Weinand/DensityEstimation1D"
 
 .
  
-\change_unchanged
-
 \end_layout
 
 \begin_layout Subsubsection
@@ -195,14 +148,10 @@ Settings
 
 \begin_layout Standard
 This class acts as a wrapper for all of the user specified values.
-\change_inserted 236236747 1402425030
-
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-
-\change_inserted 236236747 1402425224
 Make a list of the settings and a brief description of each one.
  This can be the same text that is available in the documentation.
  
@@ -210,13 +159,8 @@ Make a list of the settings and a brief description of each one.
 
 \end_inset
 
-
-\change_unchanged
- When the user selects a wavelet type, resolution, etc using the GUI
-\change_inserted 236236747 1402424507
-,
-\change_unchanged
- this automatically updates the appropriate values in this class.
+ When the user selects a wavelet type, resolution, etc using the GUI, this
+ automatically updates the appropriate values in this class.
  All fields are public and so may be accessed by any other class.
 \end_layout
 
@@ -227,15 +171,8 @@ EstimatorGUI
 \begin_layout Standard
 This class forms the actual display for the density estimator.
  Normally, it has a simple toolbar (with 'Start', 'Pause', 'Reset', and
- 'Settings') at 
-\change_inserted 236236747 1402425982
-the 
-\change_unchanged
-top and most of the space is devoted to
-\change_deleted 236236747 1402425990
- a
-\change_unchanged
- plot for the probability density function estimate.
+ 'Settings') at the top and most of the space is devoted to plot for the
+ probability density function estimate.
  Settings may only be edited once the estimating process has been stopped.
  Selecting settings will open up the SettingsUI.
 \end_layout
@@ -246,10 +183,6 @@ placement H
 wide false
 sideways false
 status open
-
-\begin_layout Plain Layout
-
-\end_layout
 
 \begin_layout Plain Layout
 \align center
@@ -264,9 +197,7 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Density Estimation Display
-\change_inserted 236236747 1402426488
- 
+Density Estimation Display 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Density-Estimation-Display"
@@ -274,16 +205,10 @@ name "fig:Density-Estimation-Display"
 \end_inset
 
 
-\change_unchanged
-
 \end_layout
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -295,74 +220,49 @@ name "fig:Density-Estimation-Display"
 \begin_layout Standard
 The actual display of the plot uses the GRAL (GRAphing Library) Java package,
  from 
-\change_deleted 236236747 1402426514
-http://trac.erichseifert.de/gral/
-\change_inserted 236236747 1402426515
-
 \begin_inset CommandInset href
 LatexCommand href
 target "http://trac.erichseifert.de/gral/"
 
 \end_inset
 
-
-\change_unchanged
  The plot supports zooming and scrolling while the estimation process is
  paused.
  One advantage of the GRAL package is that their plots are implemented with
  data listeners
-\change_inserted 236236747 1402426795
-
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-
-\change_inserted 236236747 1402426814
 What advantage does this give
-\change_unchanged
-
 \end_layout
 
 \end_inset
 
-
-\change_unchanged
 .
  In essence, when the table
-\change_inserted 236236747 1402426819
-
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-
-\change_inserted 236236747 1402426840
 Can you mention that the density is stored in a table previous to this
-\change_unchanged
-
 \end_layout
 
 \end_inset
 
-
-\change_unchanged
  corresponding to the density at each point in the domain is updated, its
  plot is automatically updated.
  Pausing and unpausing can be done freely during the density estimation
  process.
  During density estimation, the current index of the sample being evaluated
- is displayed above the plot so that the current progress is known
-\change_inserted 236236747 1402426913
- as shown in Fig 
+ is displayed above the plot so that the current progress is known as shown
+ in Fig 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Density-Estimation-Display"
 
 \end_inset
 
-
-\change_unchanged
 .
 \end_layout
 
@@ -388,69 +288,37 @@ This class performs the functionality of a wavelet.
 
 \begin_layout Standard
 Initializing a wavelet loads the proper table of 
-\change_deleted 236236747 1402426962
-phi
-\change_inserted 236236747 1402426965
-
 \begin_inset Formula $\phi$
 \end_inset
 
-
-\change_unchanged
  and 
-\change_deleted 236236747 1402426980
-psi 
-\change_inserted 236236747 1402426986
-
 \begin_inset Formula $\psi$
 \end_inset
 
-
-\change_deleted 236236747 1402426992
-va
-\change_inserted 236236747 1402426995
-va
-\change_unchanged
-lues from csv files.
+values from csv files.
  Once initialized, the inSupport function determines whether or not an incoming
  data point is supported by the wavelet.
  Furthermore, the supports methods to return the value of 
-\change_inserted 236236747 1402427017
-
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-
-\change_inserted 236236747 1402427025
 change to symbols
-\change_unchanged
-
 \end_layout
 
 \end_inset
 
-
-\change_unchanged
 psi and phi at a given point in its support.
  Interpolation between values in the support is done linearly.
-\change_inserted 236236747 1402427032
-
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-
-\change_inserted 236236747 1402427059
 Mention a blurb about cubic in higher dimensions if you think it is necessary.
-\change_unchanged
-
 \end_layout
 
 \end_inset
 
-
-\change_unchanged
 
 \end_layout
 
@@ -463,11 +331,7 @@ This class performs the bulk of the actual density estimation algorithm.
  It is responsible for initializing and updating the coefficients appropriately,
  and creating a normalized density estimate when one is requested.
  The current implementation is loop based and we are exploring whether vectoriza
-tion would offer significant speedup
-\change_inserted 236236747 1402427125
-s
-\change_unchanged
-.
+tion would offer significant speedups.
 \end_layout
 
 \begin_layout Standard
@@ -483,45 +347,29 @@ During the actual online density estimation process, (updateCoefficients).
  In order to save computational time, only those coefficients whose support
  actually contains the incoming data point are updated in accordance with
  the recursive updating procedure outlined by 
-\change_inserted 236236747 1402427182
-
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-
-\change_inserted 236236747 1402427185
 update
-\change_unchanged
-
 \end_layout
 
 \end_inset
 
-
-\change_unchanged
 García-Treviño and Barria 2012.
  Once the coefficients are computed, the unnormalized density is calculated
  in getDensity followed by normalization.
  Normalization is performed iteratively according to the algorithm proposed
  by 
-\change_inserted 236236747 1402427208
-
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-
-\change_inserted 236236747 1402427213
 include reference
-\change_unchanged
-
 \end_layout
 
 \end_inset
 
-
-\change_unchanged
 Leslaw Gajek 1986 in the function normalizeDensity.
 \end_layout
 
@@ -547,9 +395,7 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Settings User Interface
-\change_inserted 236236747 1402427225
- 
+Settings User Interface 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Settings-User-Interface"
@@ -557,16 +403,10 @@ name "fig:Settings-User-Interface"
 \end_inset
 
 
-\change_unchanged
-
 \end_layout
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -587,25 +427,17 @@ This class allows the end user to easily select the parameters controlling
  be used, and the frequency with which to update the plot.
  It also allows the user to select a data file of their own to upload and
  use.
-
-\change_inserted 236236747 1402427271
  
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-
-\change_inserted 236236747 1402427295
 Either do a short bulleted list or reference the documentation section created
  previously.
-\change_unchanged
-
 \end_layout
 
 \end_inset
 
-
-\change_unchanged
 
 \end_layout
 
@@ -708,23 +540,15 @@ An early concern was memory management when working with large files.
  Memory will most likely not be a concern, however, as a data file with
  upwards of 100 million samples could be entirely read into working memory
  without issue.
-\change_inserted 236236747 1402427485
-
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-
-\change_inserted 236236747 1402427493
 Sentence is a bit confusing.
-\change_unchanged
-
 \end_layout
 
 \end_inset
 
-
-\change_unchanged
 
 \end_layout
 
@@ -746,21 +570,15 @@ ly limited to such data sets.
 
 \begin_layout Subsubsection
 Selecting a resolution level
-\change_inserted 236236747 1402427601
-
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-
-\change_inserted 236236747 1402427617
 Be consistent with the capitals in the titles.
 \end_layout
 
 \end_inset
 
-
-\change_unchanged
 
 \end_layout
 
@@ -769,23 +587,15 @@ The resolution to select is arguably the most important parameter.
  Higher resolutions give a density distribution which is more responsive
  to local fluctuations but which is also more susceptible to noise.
  See 
-\change_inserted 236236747 1402427576
-
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-
-\change_inserted 236236747 1402427582
 updatate refs
-\change_unchanged
-
 \end_layout
 
 \end_inset
 
-
-\change_unchanged
 Jansen, Malfait, and Bultheel 1995 for a generalized cross validation method
  for wavelet resolution thresholding in the case of stationary density distribut
 ions.
@@ -805,55 +615,35 @@ Many data sets are stationary with respect to their distribution function.
  Assuming the data is non-stationary, an important consideration is how
  to implement aging.
  If exponential aging like that proposed by 
-\change_inserted 236236747 1402427639
-
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-
-\change_inserted 236236747 1402427640
 refs
-\change_unchanged
-
 \end_layout
 
 \end_inset
 
-
-\change_unchanged
 Caudle and Wegman 2009 is used, the optimal value of 
 \begin_inset Formula $\theta$
 \end_inset
 
  needs to be found.
  As discussed by
-\change_inserted 236236747 1402427652
-
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-
-\change_inserted 236236747 1402427653
 refs 
-\change_unchanged
-
 \end_layout
 
 \end_inset
 
-
-\change_unchanged
  García-Treviño and Barria 2012, selecting the optimal 
 \begin_inset Formula $\theta$
 \end_inset
 
- can be an exceedingly difficult process
-\change_inserted 236236747 1402427663
- and
-\change_unchanged
- rather opaque to the end user.
+ can be an exceedingly difficult process and rather opaque to the end user.
  In general, increasing 
 \begin_inset Formula $\theta$
 \end_inset
@@ -886,26 +676,14 @@ Other considerations
 
 \begin_layout Standard
 Enabling wavelets at a stopping resolution level of 
-\change_deleted 236236747 1402427717
-J
-\change_inserted 236236747 1402427718
-
 \begin_inset Formula $J$
 \end_inset
 
-
-\change_unchanged
  is exactly equivalent to disabling wavelets at a starting resolution of
  
-\change_deleted 236236747 1402427726
-(J + 1)
-\change_inserted 236236747 1402427746
-
 \begin_inset Formula $(J+1)$
 \end_inset
 
-
-\change_unchanged
  in terms of the density distribution function.
  The wavelet type and order to be selected are relatively unimportant in
  actually finding the density estimate, although a general rule is that

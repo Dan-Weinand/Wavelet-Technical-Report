@@ -5,6 +5,7 @@
 \textclass spie
 \options nocompress
 \use_default_options false
+\master TechReportAMALTHEA
 \maintain_unincluded_children false
 \language english
 \language_package none

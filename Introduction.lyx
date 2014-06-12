@@ -70,29 +70,15 @@ figs-within-sections
 \begin_body
 
 \begin_layout Section
-
-\change_inserted -2130722577 1402601886
 Background
-\change_deleted -2130722577 1402601883
-Introduction
-\change_unchanged
-
 \end_layout
 
 \begin_layout Standard
-In the present information economy, the colossal amounts of data generated
- daily has spawned the need for real-time data driven analysis algorithms
- that require minimal user influence.
- Density estimation is one path to extracting actionable intelligence from
- data, and wavelets serve as the building blocks on which this data-driven
- framework will be built.
- The goal of this project is to develop a computational implementation of
- this wavelet density estimation framework and showcase its utility on a
- desirable application.
- In the following report, we begin with a background of wavelet theory and
- density estimation, then describe the computational framework involved
- in this process.
+
+\change_deleted -2130722577 1402602331
  
+\change_unchanged
+
 \begin_inset Note Note
 status collapsed
 
@@ -103,29 +89,19 @@ This is a good start, make this sound better.
  the section labels will make sense.
  Include the steps you will take, meaning 1D matlab and then 1D web and
  so on.
-
-\change_deleted -2130722577 1402579351
- 
-\change_unchanged
  
 \end_layout
 
 \end_inset
 
 
-\change_inserted -2130722577 1402599687
-
 \end_layout
 
 \begin_layout Subsection
-
-\change_inserted -2130722577 1402601894
 Layout
 \end_layout
 
 \begin_layout Standard
-
-\change_inserted -2130722577 1402600915
 Before diving directly into wavelet based density estimators for streaming
  data, some background knowledge is necessary.
  First we provide a brief discussion of wavelets, their position as a basis
@@ -237,13 +213,9 @@ Wavelet section a bit short.
 \end_inset
 
 
-\change_inserted -2130722577 1402600876
-
 \end_layout
 
 \begin_layout Subsection
-
-\change_inserted -2130722577 1402600877
 Wavelets as a basis for the 
 \begin_inset Formula $L^{2}$
 \end_inset
@@ -252,8 +224,6 @@ Wavelets as a basis for the
 \end_layout
 
 \begin_layout Standard
-
-\change_inserted -2130722577 1402601772
 The 
 \begin_inset Formula $L^{2}$
 \end_inset
@@ -299,13 +269,9 @@ n.
 .
  This is clear from the reconstruction of the function given the wavelet
  coefficients given below.
-\change_unchanged
-
 \end_layout
 
 \begin_layout Standard
-
-\change_inserted -2130722577 1402601636
 
 \family roman
 \series medium
@@ -326,8 +292,6 @@ f(x)=\sum\limits _{j}\sum\limits _{k}b_{j,k}\psi_{j,k}(x),\quad j\in\mathbb{N}
 \end_inset
 
 
-\change_unchanged
-
 \end_layout
 
 \begin_layout Subsection
@@ -347,11 +311,8 @@ key "Gargour09"
 
 .
  One way to overcome this difficulty is to use the Short-time Fourier Transform,
- which applies the Fourier transform to
-\change_deleted -2130722577 1402579351
- 
-\change_unchanged
- successive finite portions of the data.
+ which applies the Fourier transform to successive finite portions of the
+ data.
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Gargour09"
@@ -572,11 +533,7 @@ Maybe put in what a filter bank is.
 
 \begin_layout Standard
 At its core, density estimation attempts to approximate the probability
- density distribution
-\change_deleted -2130722577 1402579351
- 
-\change_unchanged
- that produces a particular random variable.
+ density distribution that produces a particular random variable.
  This is a vitally important component in describing a set of data, as a
  density estimate is a readily visualized and understood statistical measure
  which provides a large quantity of information about the data studied
@@ -587,10 +544,6 @@ key "Silverman86"
 \end_inset
 
 .
-
-\change_deleted -2130722577 1402579351
- 
-\change_unchanged
  Though important, determining how to approximate the unknown distribution
  can be difficult
 \begin_inset Note Note
@@ -674,8 +627,6 @@ status open
 
 \begin_layout Plain Layout
 \align center
-
-\change_inserted -2130722577 1402579457
 \begin_inset Graphics
 	filename figures/normHist15.png
 	lyxscale 35
@@ -699,8 +650,6 @@ status open
 
 \end_inset
 
-
-\change_unchanged
 
 \begin_inset Caption
 
@@ -867,14 +816,9 @@ key "Vannucci95"
 \begin_layout Standard
 In order to find the wavelet series expansion for a density function, we
  must compute the coefficients for its basis functions.
- In order to compute these coefficients, it is useful to 
-\change_inserted -2130722577 1402600777
-recall
-\change_deleted -2130722577 1402600776
-note
-\change_unchanged
- that a density function is by definition square integrable since the total
- probability must be one and the function is never negative.
+ In order to compute these coefficients, it is useful to recall that a density
+ function is by definition square integrable since the total probability
+ must be one and the function is never negative.
  This puts density functions into 
 \begin_inset Formula $L^{2}(\mathbb{R})$
 \end_inset
@@ -900,13 +844,7 @@ In this case,
 \end_inset
 
  consists of the resolution levels of the basis functions.
- 
-\change_inserted -2130722577 1402601670
-Recall that the
-\change_deleted -2130722577 1402601667
-The
-\change_unchanged
- exact value of 
+ Recall that the exact value of 
 \begin_inset Formula $b_{j}=\left\langle f,b_{j}\right\rangle $
 \end_inset
 
