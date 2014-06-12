@@ -148,6 +148,16 @@ filename "Title.lyx"
 \begin_layout Standard
 \begin_inset CommandInset include
 LatexCommand input
+filename "abstract.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand input
 filename "Introduction.lyx"
 
 \end_inset

@@ -70,13 +70,7 @@ figs-within-sections
 \begin_body
 
 \begin_layout Section
-
-\change_inserted -2130722577 1402601886
-Background
-\change_deleted -2130722577 1402601883
 Introduction
-\change_unchanged
-
 \end_layout
 
 \begin_layout Standard
@@ -119,8 +113,8 @@ This is a good start, make this sound better.
 
 \begin_layout Subsection
 
-\change_inserted -2130722577 1402601894
-Layout
+\change_inserted -2130722577 1402599700
+Background Layout
 \end_layout
 
 \begin_layout Standard
@@ -253,7 +247,7 @@ Wavelets as a basis for the
 
 \begin_layout Standard
 
-\change_inserted -2130722577 1402601772
+\change_inserted -2130722577 1402601464
 The 
 \begin_inset Formula $L^{2}$
 \end_inset
@@ -291,41 +285,7 @@ n.
 \end_inset
 
  function space.
- In order to find the coordinates of any square integrable function in terms
- of the wavelet basis, we simply calculate 
-\begin_inset Formula $b_{j,k}=\left\langle f,b_{j,k}\right\rangle $
-\end_inset
-
-.
- This is clear from the reconstruction of the function given the wavelet
- coefficients given below.
-\change_unchanged
-
-\end_layout
-
-\begin_layout Standard
-
-\change_inserted -2130722577 1402601636
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-\begin_inset Formula 
-\[
-f(x)=\sum\limits _{j}\sum\limits _{k}b_{j,k}\psi_{j,k}(x),\quad j\in\mathbb{N}
-\]
-
-\end_inset
-
-
+ 
 \change_unchanged
 
 \end_layout
@@ -900,13 +860,7 @@ In this case,
 \end_inset
 
  consists of the resolution levels of the basis functions.
- 
-\change_inserted -2130722577 1402601670
-Recall that the
-\change_deleted -2130722577 1402601667
-The
-\change_unchanged
- exact value of 
+ The exact value of 
 \begin_inset Formula $b_{j}=\left\langle f,b_{j}\right\rangle $
 \end_inset
 

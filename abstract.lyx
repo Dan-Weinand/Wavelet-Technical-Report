@@ -62,172 +62,18 @@
 \begin_body
 
 \begin_layout Abstract
-Regarding the Title: Use a descriptive but concise title for your work.
- It is recommended that you do not exceed 8-9 words, when composing a title.
-\end_layout
-
-\begin_layout Abstract
-Regarding the Authors: For someone that is just starting her/his publishing
- career, it is strongly recommended that she/he decides on a form of her/his
- name that will be used throughout her/his careers.
- In othr words, if this is your first paper, decide about the exact form
- of your name and stick to it.
- By form, we mean the spelling of your name, the use of a middle name/initial
- and/or suffixes like 
-\begin_inset Quotes eld
-\end_inset
-
-Jr.
-\begin_inset Quotes erd
-\end_inset
-
- or 
-\begin_inset Quotes eld
-\end_inset
-
-II,
-\begin_inset Quotes erd
-\end_inset
-
- etc.
- Also, do not omit to provide your proper current affiliation like department
- or program, university name, city and state along with your school-issued
- email address.
- Moreover, decide on the order of authors.
- It is customary that the authors' order reflects the order of contribution
- to this work; it is assumed that the first author was the most significant
- contributor among the group.
- If all authors have contributed equally, it is customary to list them in
- alphabetical order according to their last name.
- As an exception, the author listed last typically depicts the person responsibl
-e for the authors' work as a group, like your faculty mentor.
- Finally, replace the 
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-
-\backslash
-hl
-\end_layout
-
-\end_inset
-
-
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-{
-\end_layout
-
-\end_inset
-
-highlighted
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\end_inset
-
- 
-\begin_inset Quotes eld
-\end_inset
-
-X
-\begin_inset Quotes erd
-\end_inset
-
- in 
-\begin_inset Quotes eld
-\end_inset
-
-AMALTHEA REU Technical Report No.
- 2013--X
-\begin_inset Quotes erd
-\end_inset
-
- appearing in the footnote with your team number.
- Obviously, you should also remove the highlighting.
- The relevant file to modify for everything mentioned up to this point is
- 
-\family typewriter
-TitleAuthors.tex
-\family default
-.
- Also, remember to edit the document information settings of 
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-
-\backslash
-verb|
-\backslash
-hypersetup{ }|
-\end_layout
-
-\end_inset
-
- in 
-\family typewriter
-sty/packages.sty
-\family default
- to reflect the correct title (
-\family typewriter
-pdftitle
-\family default
- and 
-\family typewriter
-pdfsubject
-\family default
-), authors (
-\family typewriter
-pdfauthor
-\family default
-) and keywords (
-\family typewriter
-pdfkeywords
-\family default
-).
-\end_layout
-
-\begin_layout Abstract
-Regarding the Abstract: A typical abstract provides concise descriptions
- of (i) what problem you are addressing, (ii) the problem's importance,
- (iii) the paper's approach to address it and (iv) the conclusions and or
- results.
- Avoid the use of 
-\emph on
-italic
-\emph default
- or 
-\series bold
-boldface
-\series default
- fonts in the abstract.
- Also, a typical abstract should be about 200 to 250 words in length formatted
- as a single or a pair of paragraphs.
- It is not unusual to compile the abstract towards the end of the authoring
- process once the paper has a good form and content.
-\end_layout
-
-\begin_layout Abstract
-Regarding the Keywords: Include about 5-10 keywords that are relevant to
- your work presented in this report.
- Keywords should appear in alphabetical order, separated by commas.
- The relevant file to modify the abstract and the keywords is 
-\family typewriter
-AbstractKeywords.tex
-\family default
-.
+In the present information economy, the colossal amounts of data generated
+ daily has spawned the need for real-time data driven analysis algorithms
+ that require minimal user influence.
+ Density estimation is one path to extracting actionable intelligence from
+ data, and wavelets serve as the building blocks on which this data-driven
+ framework will be built.
+ The goal of this project is to develop a computational implementation of
+ this wavelet density estimation framework and showcase its utility on a
+ desirable application.
+ In the following report, we begin with a background of wavelet theory and
+ density estimation, then describe the computational framework involved
+ in this process.
 \end_layout
 
 \begin_layout Standard
@@ -249,8 +95,7 @@ status collapsed
 \end_layout
 
 \begin_layout Keywords
-Adaptive Resonance Theory, Evolutionary Algorithm, Memetic Algorithms, Multi-Obj
-ective Optimization, Simulated Annealing
+Non-parametric Estimators, Streaming Data, Wavelet Density Estimation
 \end_layout
 
 \begin_layout Standard
