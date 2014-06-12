@@ -62,12 +62,22 @@
 \begin_body
 
 \begin_layout Section
-1-D Matlab Implementation
+Matlab Prototypes
 \end_layout
 
 \begin_layout Standard
 In coding the 1-dimensional streaming data density estimator we used Mark
- Moyou and Eddy Ihou's architecture, illustrated below.
+ Moyou and Eddy Ihou's architecture, illustrated in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Density-Estimation-Process"
+
+\end_inset
+
+.
+ The 2-dimensional prototype kept this architecture and file structure,
+ only incorporating some minor optimizations to making working in higher
+ dimensions more manageable.
 \end_layout
 
 \begin_layout Standard
@@ -94,6 +104,13 @@ status open
 
 \begin_layout Plain Layout
 Density Estimation Process
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Density-Estimation-Process"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -111,8 +128,8 @@ Obtain Samples
 \end_layout
 
 \begin_layout Standard
-We assume that data has been collected previously and processed into a one-dimen
-sional data set.
+We assume that data has been collected previously and processed into a set
+ with uniform ranges across dimensions.
  It is likewise assumed that the maximum and minimum range for the data
  (or at least the desired support) is known.
 \end_layout
@@ -657,6 +674,127 @@ while
 
 
 \begin_inset Formula $k=k+2$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Extension to Higher Dimensional Data
+\end_layout
+
+\begin_layout Standard
+In extending the concept of wavelet analysis to higher dimensions, it is
+ useful to recall
+\begin_inset Formula $\mathbf{V}_{j}$
+\end_inset
+
+ which is defined as the space of functions which can be expressed by wavelets
+ at the 
+\begin_inset Formula $j$
+\end_inset
+
+th resolution level.
+ Wavelet analysis can then be extended to 
+\begin_inset Formula $m$
+\end_inset
+
+-dimensions via defining the 
+\begin_inset Formula $m$
+\end_inset
+
+-dimensional vector space 
+\begin_inset Formula $\mathbf{V}_{j}^{m}$
+\end_inset
+
+ as the tensor power of the one dimensional 
+\begin_inset Formula $\mathbf{V}_{j}$
+\end_inset
+
+.
+ The wavelet and scaling basis functions in 
+\begin_inset Formula $m$
+\end_inset
+
+ dimensional space are then given as:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\varphi_{j,k_{1},k_{2}...k_{m}}^{m}(x_{1},x_{2},...,x_{m})=\varphi_{j,k_{1}}(x_{1})\varphi_{j,k_{2}}(x_{2})...\varphi_{j,k_{m}}(x_{m})\label{eq:Multidimensional varphi as tensor product}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+From this we can see that it is necessary to have a coefficient 
+\begin_inset Formula $b_{j,k_{1},k_{2}...k_{m}}$
+\end_inset
+
+ defined across each translate for each dimension of our data.
+ Thus, in the 1-dimensional case we needed a vector for the coefficients
+ of the scaling basis functions, in the 2-dimensional case we need a matrix
+ for those coefficients, and so on in higher dimensions.
+ 
+\end_layout
+
+\begin_layout Standard
+In the 2-dimensional Matlab prototype, the algorithms discussed work in
+ the same manner as previously explained for the 1-dimensional case, with
+ the minor change that we add another loop across the translates in the
+ second dimension.
+ Furthermore, an early implementation of the prototype spent virtually all
+ of its time calculating the densities once the coefficients were known.
+ In particular, vast amounts of time were spent interpolating amongst the
+ 
+\begin_inset Formula $\phi$
+\end_inset
+
+ tables.
+ Since the meshgrid across which we define our density approximation does
+ not change, we can initially calculate all of these interpolations which
+ we need given the support range and discretization (merely looking up these
+ calculations in the future).
+ This resulted in speedup of several orders of magnitude, and plotting the
+ density function for 2-dimensional data now occurs close to interactive
+ speeds.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename figures/Matlab2D3peakedGauss.png
+	lyxscale 50
+	scale 40
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Matlab 2-D Prototype performance at approximating a 3 Gaussian mixture model
+\end_layout
+
 \end_inset
 
 

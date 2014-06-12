@@ -240,7 +240,7 @@ What advantage does this give
 \end_inset
 
 .
- In essence, when the table
+ In essence the data listeners work so that, when the table
 \begin_inset Note Note
 status open
 
@@ -299,27 +299,15 @@ values from csv files.
  Once initialized, the inSupport function determines whether or not an incoming
  data point is supported by the wavelet.
  Furthermore, the supports methods to return the value of 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-change to symbols
-\end_layout
-
+\begin_inset Formula $\phi$
 \end_inset
 
-psi and phi at a given point in its support.
+ and 
+\begin_inset Formula $\psi$
+\end_inset
+
+ at a given point in its support.
  Interpolation between values in the support is done linearly.
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Mention a blurb about cubic in higher dimensions if you think it is necessary.
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsubsection
@@ -346,31 +334,32 @@ First, the valid translates given the resolution, density domain, and wavelet
 During the actual online density estimation process, (updateCoefficients).
  In order to save computational time, only those coefficients whose support
  actually contains the incoming data point are updated in accordance with
- the recursive updating procedure outlined by 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-update
-\end_layout
+ the recursive updating procedure outlined by equations (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Decay Update"
 
 \end_inset
 
-García-Treviño and Barria 2012.
+) and (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Window update"
+
+\end_inset
+
+).
  Once the coefficients are computed, the unnormalized density is calculated
  in getDensity followed by normalization.
  Normalization is performed iteratively according to the algorithm proposed
- by 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-include reference
-\end_layout
+ by Leslaw Gajek 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Gajek86"
 
 \end_inset
 
-Leslaw Gajek 1986 in the function normalizeDensity.
+ in the function normalizeDensity.
 \end_layout
 
 \begin_layout Subsubsection
