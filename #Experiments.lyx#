@@ -76,7 +76,7 @@ In this section we see how the estimator performs at describing the potentially
 \end_layout
 
 \begin_layout Subsection
-Stocks and the variability/volume relationship
+Stocks and the volatility/volume relationship
 \end_layout
 
 \begin_layout Standard
@@ -109,13 +109,7 @@ key "Tauchen83"
  To put it another way, if a stock is being exchanged at unusually large
  volumes it is very likely that its price has gone up or down by a significant
  amount.
- The result of this is that trading on particularly high volume days entails
- a great deal of risk.
-\end_layout
-
-\begin_layout Standard
-Two competing theories exist to account for the volume versus variability
- correlation.
+ Two competing theories exist to account for this phenomenon.
  In the first, variance of daily price change is viewed as the sum of a
  random number of intra-day price changes.
  The variance of daily price change is then correlated with the number of
@@ -127,31 +121,11 @@ key "Clark73"
 \end_inset
 
 .
- The second model assumes a positive relationship between how much traders
- disagree when revising their reservation prices and the absolute change
- in the stock's market price.
- The volume versus variability relationship springs from the correlation
- between trading volume and trader disagreement in revising reservation
- prices 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Epps76"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-Regardless of the underlying process for the phenomenon, traders need to
- keep the volume versus variability relation in mind when examining the
- risk of trading.
- Knowledge of how this relationship varies over time could give traders
- a better sense of the risk they accept when trading on high volume days.
+ The second model
 \end_layout
 
 \begin_layout Subsection
-Data and preprocessing
+Experimental Results
 \end_layout
 
 \end_body

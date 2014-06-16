@@ -39,11 +39,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% AUTHORS
 % Specify the list of authors and their affiliations (department & university name below:
-\author{Daniel Weinand\supit{a}, Gedeon Nyengele\supit{b} and Georgios C. Anagnostopoulos\supit{c}
+\author{Daniel Weinand\supit{a}, Gedeon Nyengele\supit{b},  Mark Moyou\supit{c}, Adrian Peter\supit{d}, and Georgios C. Anagnostopoulos\supit{e}
 \skiplinehalf
 \small
 \supit{a}Operations Research, Florida Institute of Technology, Melbourne, Florida;
-\href{mailto:someone@fit.edu}{someone@fit.edu} \\
+\href{mailto:dweinand@fit.edu}{gnyengele@fit.edu} \\
 \supit{b}Computer Sciences, Florida Institute of Technology, Melbourne, Florida;
 \href{mailto:someoneelse@fit.edu}{someoneelse@fit.edu} \\
 \supit{c}Electrical \& Computer Engineering, Florida Institute of Technology, Melbourne, Florida;
@@ -186,10 +186,20 @@ filename "1D_Java.lyx"
 \end_layout
 
 \begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand input
+filename "Experiments.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
 bibfiles "References"
-options "plainurl"
+options "plain"
 
 \end_inset
 

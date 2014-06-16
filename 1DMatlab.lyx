@@ -344,7 +344,14 @@ In both of the recursive updating schemes, it is not necessary to actually
  is guaranteed to be equal to zero.
  Thus, by simply checking whether or not a point is supported by a basis
  function before evaluating it we save significant amounts of computation
- time.
+ time
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Trevino12"
+
+\end_inset
+
+.
  It is also worth noting that for the majority of the wavelets used in estimatio
 n, no closed form approximation exists.
  Due to this, a table of values defining the wavelet over its support is
@@ -744,7 +751,31 @@ From this we can see that it is necessary to have a coefficient
  Thus, in the 1-dimensional case we needed a vector for the coefficients
  of the scaling basis functions, in the 2-dimensional case we need a matrix
  for those coefficients, and so on in higher dimensions.
- 
+ Also important to note, while in the 1-dimensional case we have a 
+\begin_inset Formula $\psi$
+\end_inset
+
+ and a 
+\begin_inset Formula $\phi$
+\end_inset
+
+ function, with 2-dimensional wavelets we have 
+\begin_inset Formula $\phi_{1}\phi_{2}$
+\end_inset
+
+, 
+\begin_inset Formula $\phi_{1}\psi_{2}$
+\end_inset
+
+, 
+\begin_inset Formula $\psi_{1}\phi_{2}$
+\end_inset
+
+, and 
+\begin_inset Formula $\psi_{1}\psi_{2}$
+\end_inset
+
+ functions.
 \end_layout
 
 \begin_layout Standard
