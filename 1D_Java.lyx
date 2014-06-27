@@ -148,20 +148,52 @@ Settings
 
 \begin_layout Standard
 This class acts as a wrapper for all of the user specified values.
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Make a list of the settings and a brief description of each one.
- This can be the same text that is available in the documentation.
- 
-\end_layout
-
-\end_inset
-
  When the user selects a wavelet type, resolution, etc using the GUI, this
  automatically updates the appropriate values in this class.
  All fields are public and so may be accessed by any other class.
+ The fields include
+\end_layout
+
+\begin_layout Itemize
+startLevel and stopLevel: the starting and stopping resolution levels for
+ the estimator
+\end_layout
+
+\begin_layout Itemize
+waveletType: a string referring to the wavelet family and order (if applicable)
+\end_layout
+
+\begin_layout Itemize
+agingFlag: the type of aging to be used on the data (options are windowing,
+ exponential decay, and none)
+\end_layout
+
+\begin_layout Itemize
+discretization: how widely to space the points over which to calculate the
+ density
+\end_layout
+
+\begin_layout Itemize
+updateFrequency: how many samples are read in between updating the plot
+\end_layout
+
+\begin_layout Itemize
+windowSize: when using the windowing aging process, determines the size
+ of the window
+\end_layout
+
+\begin_layout Itemize
+agingTheta: when using the exponential decay aging process, determines the
+ speed of the aging
+\end_layout
+
+\begin_layout Itemize
+densityRange: the minimum and maximum values over which the density is defined
+\end_layout
+
+\begin_layout Itemize
+waveletFlag: whether or not to use wavelets in addition to the scaling basis
+ functions
 \end_layout
 
 \begin_layout Subsubsection
@@ -527,22 +559,11 @@ An early concern was memory management when working with large files.
  with respect to the window size selected and independent of the size of
  the data file being used.
  Memory will most likely not be a concern, however, as a data file with
- upwards of 100 million samples could be entirely read into working memory
- without issue.
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Sentence is a bit confusing.
-\end_layout
-
-\end_inset
-
-
+ over 10 million samples can easily fit into working memory.
 \end_layout
 
 \begin_layout Subsection
-Recommendations for Use
+Recommendations for use
 \end_layout
 
 \begin_layout Subsubsection
@@ -550,8 +571,8 @@ Data sets
 \end_layout
 
 \begin_layout Standard
-The current default settings work well for normalized data but are not necessari
-ly limited to such data sets.
+The current default settings work well for normalized data (mean 0 and standard
+ deviation of 1) but are not necessarily limited to such data sets.
  However, if non-normalized data is to be used, we strongly recommend that
  the density domain setting be edited in order to properly accommodate the
  data being used.
@@ -559,35 +580,43 @@ ly limited to such data sets.
 
 \begin_layout Subsubsection
 Selecting a resolution level
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Be consistent with the capitals in the titles.
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
 The resolution to select is arguably the most important parameter.
  Higher resolutions give a density distribution which is more responsive
  to local fluctuations but which is also more susceptible to noise.
- See 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-updatate refs
-\end_layout
+ While resolution levels are most typically thought of as starting at integer
+ values, the only real requirement is an integer distance between the starting
+ and stopping resolutions.
+ In light of this, we allow the user to select real valued resolutions.
+ For a proof of the orthogonality of arbitrary starting resolution see Appendix
+ A.
+ For more information on selecting an appropriate resolution level, see
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Jansen95"
 
 \end_inset
 
-Jansen, Malfait, and Bultheel 1995 for a generalized cross validation method
- for wavelet resolution thresholding in the case of stationary density distribut
-ions.
+ for a generalized cross validation method for wavelet resolution thresholding
+ in the case of stationary density distributions.
+ Other thresholding techniques such as SureShrink
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Donoho95"
+
+\end_inset
+
+ and BayesShrink 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Chang00"
+
+\end_inset
+
+ have also been proposed for the stationary case.
  Rigorously theoretically grounded methods for optimizing the resolution
  given a non-stationary distribution have not been proposed to the extent
  of our knowledge.
@@ -603,32 +632,26 @@ Many data sets are stationary with respect to their distribution function.
  look at the data as non-stationary before trying to optimize aging parameters.
  Assuming the data is non-stationary, an important consideration is how
  to implement aging.
- If exponential aging like that proposed by 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-refs
-\end_layout
+ If exponential aging like that proposed by Caudle and Wegman 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Wegman06"
 
 \end_inset
 
-Caudle and Wegman 2009 is used, the optimal value of 
+ is used, the optimal value of 
 \begin_inset Formula $\theta$
 \end_inset
 
  needs to be found.
- As discussed by
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-refs 
-\end_layout
+ As discussed by García-Treviño and Barria 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Trevino12"
 
 \end_inset
 
- García-Treviño and Barria 2012, selecting the optimal 
+, selecting the optimal 
 \begin_inset Formula $\theta$
 \end_inset
 

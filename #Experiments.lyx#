@@ -1,0 +1,741 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass spie
+\begin_preamble
+
+\end_preamble
+\options nocompress
+\use_default_options false
+\master TechReportAMALTHEA.lyx
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 0
+\use_mathdots 0
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Section
+Applications
+\end_layout
+
+\begin_layout Standard
+In this section we see how the estimator performs at describing the potentially
+ non-stationary relationship between the daily change of a stock's price
+ and the volume at which it was traded.
+\end_layout
+
+\begin_layout Subsection
+Stocks and the variability/volume relationship
+\end_layout
+
+\begin_layout Standard
+Stock traders must walk a delicate balance between risk and reward.
+ Low risk investments may bring in a small trickle of steady income but
+ have little chance of making large gains.
+ On the other hand, high risk investments are often paired with the potential
+ for huge profits.
+ A properly diversified investment portfolio has some combination of the
+ two types of investments according to the manager's personal concern for
+ massive loss versus above average gain.
+ There are a variety of factors which influence the risk of a given investment.
+ For example, startup companies tend to have a higher chance for failure
+ but also increase their stock prices much more than an established company
+ if they succeed.
+ Other risk factors are time dependent; making trades during a market crash
+ carries much more uncertainty than trading during more normal periods.
+\end_layout
+
+\begin_layout Standard
+One well established risk relationship is that the volume of a stock being
+ traded tends to correlate with that stock's absolute change in price
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Tauchen83"
+
+\end_inset
+
+.
+ To put it another way, if a stock is being exchanged at unusually large
+ volumes it is very likely that its price has gone up or down by a significant
+ amount.
+ The result of this is that trading on particularly high volume days entails
+ a great deal of risk.
+\end_layout
+
+\begin_layout Standard
+Two competing theories exist to account for the volume versus variability
+ correlation.
+ In the first, variance of daily price change is viewed as the sum of a
+ random number of intra-day price changes.
+ The variance of daily price change is then correlated with the number of
+ transactions occurring that day 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Clark73"
+
+\end_inset
+
+.
+ The second model assumes a positive relationship between how much traders
+ disagree when revising their reservation prices and the absolute change
+ in the stock's market price.
+ The volume versus variability relationship springs from the correlation
+ between trading volume and trader disagreement in revising reservation
+ prices 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Epps76"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Regardless of the underlying process for the phenomenon, traders need to
+ keep the volume versus variability relation in mind when examining the
+ risk of trading.
+ Knowledge of how this relationship varies over time could give traders
+ a better sense of the risk they accept when trading on high volume days.
+\end_layout
+
+\begin_layout Subsection
+Data and preprocessing
+\end_layout
+
+\begin_layout Standard
+Original data comes from the historical stock data set on Quant Quote (https://q
+uantquote.com/historical-stock-data) on June 9th, 2014.
+ The raw data contained the following variables: the Date, Ticker (which
+ comes from the file name), Open, High, Low, Close, Volume for the day.
+ We use the 50 stocks with most complete information in the Quant Quote
+ set (completeness was decided by the size of the data file for the company).
+ Since this selects for companies which lasted the roughly 14 year period,
+ survivorship bias is a potential source of error in our subsequent analyses.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename figures/VolumeNormProcess.png
+	lyxscale 70
+	scale 60
+
+\end_inset
+
+ 
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Volume Normalization Process ('hum' ticker)
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Volume-Normalization-Process"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since the raw price for the various companies was frequently very different,
+ it was necessary to normalize the data by examining the percent price change
+ instead of the original price.
+ Likewise, different stocks are traded at radically varying volumes and
+ these volumes are largely time dependent.
+ In order to account for this, we use the standard technique of taking the
+ logarithm of the individual company data.
+ After this, we fit a linear model to the log trading volume versus time
+ and examine the residuals 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Takada01"
+
+\end_inset
+
+.
+ This process can be seen in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Volume-Normalization-Process"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In order to keep the two variables on the same scale for the eventual estimator,
+ both were recentered about their mean and then divided by their standard
+ deviation.
+ We are, therefore, simply working with the variables in terms of their
+ standard deviations.
+\end_layout
+
+\begin_layout Subsection
+Selection of the resolution level and 
+\begin_inset Formula $\theta$
+\end_inset
+
+ value
+\end_layout
+
+\begin_layout Standard
+The true density distribution over the two variables (trading volume residuals
+ and percent price change) is not known a priori.
+ We do however, believe that the distribution exhibits a certain degree
+ of smoothness.
+ This smoothness can be controlled via the resolution level (
+\begin_inset Formula $j_{0}$
+\end_inset
+
+) of the estimator.
+ Further, we believe that the distribution does not change instantaneously
+ so that the current density should be indicative of points in the immediate
+ future.
+ The speed of the estimator's response to changes in the underlying distribution
+ can be controlled by the aging parameter 
+\begin_inset Formula $\theta$
+\end_inset
+
+.
+ We opted for the exponential decay model rather than the windowing method
+ as it seems reasonable that stock data is most closely related to data
+ immediately previous to it with a slow decay of this relationship over
+ time.
+ The windowing method would assume an equal relation between data points
+ for a fixed period of time after which there is utterly no relation, a
+ rather odd idea for real world data.
+\end_layout
+
+\begin_layout Standard
+We wish to select the 'best' pair (
+\begin_inset Formula $\theta,j_{0}$
+\end_inset
+
+) for our data.
+ We define the 'best' estimator as the one for which the sum of the log
+ probabilities of the incoming points is maximized.
+ In more depth, each time we take a point in from the data set we calculated
+ its probability given the current density model, take the log of that value,
+ and then add it to the model's total score.
+ This selects a model which is effective at predicting yet to be seen future
+ data.
+ From Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Theta-j0-selection"
+
+\end_inset
+
+ it can be seen that the optimal parameters were a 
+\begin_inset Formula $j_{0}$
+\end_inset
+
+ of 1 and a 
+\begin_inset Formula $\theta$
+\end_inset
+
+ of .9995.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="8" columns="4">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Evaluation results
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Resolution level
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\theta$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+.995
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-520,000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-533,000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-617,000
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+.999
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-511,000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-504,000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-524,000
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+.9995
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-512,000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-502,000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-513,000
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+.9999
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-523,000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-513,000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-514,000
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Sum log probability results for selected 
+\begin_inset Formula $\theta$
+\end_inset
+
+ and 
+\begin_inset Formula $j_{0}$
+\end_inset
+
+ values
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Theta-j0-selection"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Analysis of volume/variability mutual information
+\end_layout
+
+\begin_layout Standard
+The model parameters selected as optimal by the validation scheme described
+ above was run on the data set while computing the mutual information of
+ the two variables every 100 samples.
+ This gives a measure of how much the distribution of one variable is dependent
+ on the value of the other.
+ In other words, how much information does the stock trading volume give
+ about the probable price change at a given point in time.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Stock-Mutual-information"
+
+\end_inset
+
+ shows the evolution of this metric over time.
+ At first glance, it seems difficult to extract much useful knowledge from
+ the raw graph.
+ However, the sharpest peak corresponds to the August 2011 United States
+ debt ceiling crisis
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/VarVolMutualInformation.png
+	scale 80
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Mutual information between stock trading volume and variability over time
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Stock-Mutual-information"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

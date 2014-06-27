@@ -3,8 +3,8 @@
 \begin_document
 \begin_header
 \textclass spie
-\options nocompress
 \use_default_options false
+\master TechReportAMALTHEA.lyx
 \maintain_unincluded_children false
 \language english
 \language_package none
@@ -61,34 +61,12 @@
 
 \begin_body
 
-\begin_layout Standard
+\begin_layout Section
 \start_of_appendix
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-%dummy comment inserted by tex2lyx to ensure that this paragraph is not
- empty
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Section
-Proof of Theorem 1
-\end_layout
-
-\begin_layout Standard
+Orthogonality of resolutions under arbitrary scaling
 \begin_inset CommandInset label
 LatexCommand label
-name "app:Proof1"
+name "sec:Orthogonality-of-arbitrary"
 
 \end_inset
 
@@ -96,54 +74,38 @@ name "app:Proof1"
 \end_layout
 
 \begin_layout Standard
-Anything that would 
-\begin_inset Quotes eld
+We wish to prove that if two basis functions subject to the dyadic wavelet
+ transform with resolution levels 
+\begin_inset Formula $j_{1},j_{2}\in\mathbb{Z}$
 \end_inset
 
-disrupt
-\begin_inset Quotes erd
+ are orthogonal across integer translates, then those functions with new
+ resolution levels 
+\begin_inset Formula $j_{1}+m,j_{2}+m$
 \end_inset
 
- the flow of the main document is included in an appendix.
- Typical items provided here are long formal proofs, derivations, data,
- etc.
+ (where 
+\begin_inset Formula $m\in\mathbb{R}$
+\end_inset
+
+) are as well.
+ Let 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ be considered interchangeable for either the father and mother wavelet
+ function.
+ From the orthogonality of the functions, we have
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-
-\backslash
-lipsum
-\end_layout
-
-\end_inset
-
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-[1]
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Section
-Proof of Theorem 2
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset label
-LatexCommand label
-name "app:Proof2"
+\begin_inset Formula 
+\begin{align*}
+0 & =\left\langle \varphi_{j_{1},k_{1}},\varphi_{j_{2},k_{2}}\right\rangle ,\forall k\in\mathbb{Z}\\
+ & =\int_{\mathbb{R}}\varphi_{j_{1},k_{1}}(x)\varphi_{j_{2},k_{2}}(x)dx\\
+ & =\int_{\mathbb{R}}2^{j_{1}/2}\varphi(2^{j_{1}}x-k_{1})2^{j_{2}/2}\varphi(2^{j_{2}}x-k_{2})dx\\
+ & =2^{\frac{j_{1}+j_{2}}{2}}\int_{\mathbb{R}}\varphi(2^{j_{1}}x-k_{1})\varphi(2^{j_{2}}x-k_{2})dx
+\end{align*}
 
 \end_inset
 
@@ -151,30 +113,39 @@ name "app:Proof2"
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status collapsed
+Now we have a change of variable where 
+\begin_inset Formula $t=2^{-m}x$
+\end_inset
 
-\begin_layout Plain Layout
-
-
-\backslash
-lipsum
+ so that
 \end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+ & =2^{m+\frac{j_{1}+j_{2}}{2}}\int_{\mathbb{R}}\varphi(2^{j_{1}+m}t-k_{1})\varphi(2^{j_{2}+m}t-k_{2})dt\\
+ & =2^{m+\frac{j_{1}+j_{2}}{2}}2^{-m-\frac{j_{1}+j_{2}}{2}}\left\langle \varphi_{j_{1}+m,k_{1}}\varphi_{j_{2}+m,k_{2}}\right\rangle \\
+ & =\left\langle \varphi_{j_{1}+m,k_{1}}\varphi_{j_{2}+m,k_{2}}\right\rangle 
+\end{align*}
 
 \end_inset
 
 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-[2]
 \end_layout
 
+\begin_layout Standard
+From this we see that the orthogonality of the functions is maintained so
+ long as we only use integer translations and scaling factors.
+ This lets us select any arbitrary real value as our starting resolution
+ 
+\begin_inset Formula $j_{0}$
 \end_inset
 
+ so long as the stopping level 
+\begin_inset Formula $J$
+\end_inset
 
+ is an integer distance 
 \end_layout
 
 \end_body

@@ -1,2 +1,3 @@
 # Ignore the .lyx~ files as they are temporary and do not matter
 *.lyx~
+*.bak
