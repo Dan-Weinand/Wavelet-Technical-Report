@@ -62,6 +62,7 @@ figs-within-sections
 \html_math_output 0
 \html_css_as_file 0
 \html_be_strict false
+\author -2130722577 "dweinand" 
 \end_header
 
 \begin_body
@@ -144,6 +145,17 @@ target "https://github.com/Dan-Weinand/DensityEstimation1D"
 
 \begin_layout Subsubsection
 Settings
+\change_inserted -2130722577 1404143711
+
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Settings"
+
+\end_inset
+
+
+\change_unchanged
+
 \end_layout
 
 \begin_layout Standard
@@ -261,17 +273,7 @@ target "http://trac.erichseifert.de/gral/"
  The plot supports zooming and scrolling while the estimation process is
  paused.
  One advantage of the GRAL package is that their plots are implemented with
- data listeners
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-What advantage does this give
-\end_layout
-
-\end_inset
-
-.
+ data listeners.
  In essence the data listeners work so that, when the table
 \begin_inset Note Note
 status open
@@ -439,27 +441,17 @@ name "fig:Settings-User-Interface"
 \begin_layout Standard
 This class allows the end user to easily select the parameters controlling
  the density estimation process.
- Settings include: wavelet family, wavelet order, resolution, aging method
- (and window size if windowing is used or 
-\begin_inset Formula $\theta$
+ These are the settings referenced in subsection 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Settings"
+
 \end_inset
 
- if exponential aging is used), density domain, whether wavelets are to
- be used, and the frequency with which to update the plot.
+.
  It also allows the user to select a data file of their own to upload and
  use.
  
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Either do a short bulleted list or reference the documentation section created
- previously.
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsubsection
@@ -592,34 +584,7 @@ The resolution to select is arguably the most important parameter.
  In light of this, we allow the user to select real valued resolutions.
  For a proof of the orthogonality of arbitrary starting resolution see Appendix
  A.
- For more information on selecting an appropriate resolution level, see
  
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Jansen95"
-
-\end_inset
-
- for a generalized cross validation method for wavelet resolution thresholding
- in the case of stationary density distributions.
- Other thresholding techniques such as SureShrink
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Donoho95"
-
-\end_inset
-
- and BayesShrink 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Chang00"
-
-\end_inset
-
- have also been proposed for the stationary case.
- Rigorously theoretically grounded methods for optimizing the resolution
- given a non-stationary distribution have not been proposed to the extent
- of our knowledge.
 \end_layout
 
 \begin_layout Subsubsection
@@ -678,8 +643,7 @@ key "Trevino12"
  samples, the user may pick how many samples to average at a time and the
  tradeoff between noise insensitivity versus rapid adjustment to changes
  in the distribution function is fairly straightforward.
- Based on this, we recommend the sliding window approach unless there is
- a clear-cut reason for using exponential discounting.
+ Based on this, we recommend the sliding window approach for simplicity.
 \end_layout
 
 \begin_layout Subsubsection

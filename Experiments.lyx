@@ -71,12 +71,12 @@ Applications
 
 \begin_layout Standard
 In this section we see how the estimator performs at describing the potentially
- non-stationary relationship between the daily change of a stock's price
- and the volume at which it was traded.
+ non-stationary relationship between several variables of interest in stock
+ market analysis.
 \end_layout
 
 \begin_layout Subsection
-Stocks and the variability/volume relationship
+Stock trading: the variability/volume relationship
 \end_layout
 
 \begin_layout Standard
@@ -150,7 +150,7 @@ Regardless of the underlying process for the phenomenon, traders need to
  a better sense of the risk they accept when trading on high volume days.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Data and preprocessing
 \end_layout
 
@@ -173,6 +173,7 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Graphics
 	filename figures/VolumeNormProcess.png
 	lyxscale 70
@@ -239,7 +240,7 @@ In order to keep the two variables on the same scale for the eventual estimator,
  standard deviations.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Selection of the resolution level and 
 \begin_inset Formula $\theta$
 \end_inset
@@ -286,8 +287,8 @@ We wish to select the 'best' pair (
  In more depth, each time we take a point in from the data set we calculated
  its probability given the current density model, take the log of that value,
  and then add it to the model's total score.
- This selects a model which is effective at predicting yet to be seen future
- data.
+ Choosing the model with the least negative total score selects for effectivenes
+s at predicting future data.
  From Table 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -668,7 +669,7 @@ name "tab:Theta-j0-selection"
 
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Analysis of volume/variability mutual information
 \end_layout
 
@@ -703,6 +704,7 @@ reference "fig:Stock-Mutual-information"
  Other features of the chart may very well correspond to significant periods
  for the market, but we limit our analysis to highlighting to two most noticeabl
 e periods.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -716,7 +718,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename figures/VarVolMutualInformation.png
-	scale 80
+	scale 60
 
 \end_inset
 
@@ -732,6 +734,246 @@ name "fig:Stock-Mutual-information"
 \end_inset
 
 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Using the same model parameters on randomly distributed, uncorrelated Gaussian
+ data the mutual information index stayed near to 1 once training had occurred
+ as shown by Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Random-Mutual-information"
+
+\end_inset
+
+.
+ The contrast between the two plots is stark, suggesting that a large amount
+ of information about stock price changes can be determined from that stock's
+ trading volume for that day.
+ This agrees with literature reporting a noticeable relationship between
+ stock trading volume and price variability.
+ It is worth noting that the initial spike seen in both plots corresponds
+ to the 'learning' period of the density estimation model and can be safely
+ ignored.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/RandMutualInfo.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Mutual information between Gaussian, uncorrelated variables 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Random-Mutual-information"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Option trading: the volume and put/call ratio relationship
+\end_layout
+
+\begin_layout Standard
+Stock options are a form of derivative financial instrument which serve
+ to move risk between investors 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Darskuviene10"
+
+\end_inset
+
+.
+ They are a contract which gives the buyer the option to purchase (in the
+ case of a put) or sell (in the case of a call) a stock at a fixed price
+ at some point in the future.
+ It is worth noting that the decision of whether or not to exercise the
+ option remains in the buyer's hands, so obviously it will only be used
+ if it is profitable to do so.
+ Options are extremely high risk, if a put is made and the stock price goes
+ down then the put will be worthless.
+ This is in contrast to a true stock, which will retain most of its worth
+ even during a significant crisis.
+ On the other hand, options present massive opportunities for profit particularl
+y in cases of insider trading 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Donoho04"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+It is generally expected that the ratio between puts and calls stay relatively
+ close to 1.
+ Large positive (or negative) deviations from this value suggest that the
+ stock's price is expected to increase (decrease) strongly in the future,
+ and if this expectation is widespread it will affect both the price of
+ puts (calls) as well as the price of underlying stock which will work to
+ bring the ratio back into balance.
+ Worth noting, however, is that the ratio will generally be slightly lower
+ than 1 (closer to .93) due to the use of calls acting as short positions
+ to hedge the mostly long positions widely held in the market.
+\end_layout
+
+\begin_layout Subsubsection
+Analysis of volume and put/call ratio mutual information
+\end_layout
+
+\begin_layout Standard
+The selection of the resolution level 
+\begin_inset Formula $j_{0}$
+\end_inset
+
+ and the aging parameter 
+\begin_inset Formula $\theta$
+\end_inset
+
+ occurred using the same type of grid search previously described.
+ The optimal levels were selected as 
+\begin_inset Formula $j_{0}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\theta=.992$
+\end_inset
+
+.
+ The option data has far fewer points per period of time when compared to
+ the stock price data.
+ As such, we could predict that if the two distributions change a roughly
+ equal amount over the same period of time then the option data should require
+ a lower 
+\begin_inset Formula $\theta$
+\end_inset
+
+ to take this into account.
+ Further, other researchers 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Trevino12,Wegman06"
+
+\end_inset
+
+ have noted that the more rapid the aging the lower the resolution must
+ be to compensate.
+ The optimal levels chosen bear out these expectations.
+\end_layout
+
+\begin_layout Standard
+Using the selected values, we calculated the mutual information of the volume
+ and put/call ratio over time.
+ The results can be seen in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Overall-Option-Volume"
+
+\end_inset
+
+.
+ Several interesting trends come to mind during the initial observation
+ of the plot.
+ First would be the appearance of an approximately 18 month period up and
+ down cycle.
+ We are currently unaware of what financial activity might be causing this
+ cycle but the topic deserves further investigation.
+ Also worth noting is the sharp downward trend in the mutual information
+ towards the present era.
+ This seems to suggest that the relationship which once held between the
+ two variables is becoming weaker, which could be due to improved market
+ efficiency.
+ The increase in market efficiency is implied since if there is information
+ about the relative desire of puts or calls from the option trading volume,
+ then any sellers incorporating this information into their option pricing
+ would display increased profits.
+ This increase in profit should lead to the majority of firms taking these
+ trends into account, which would increase the price of the unusually desirable
+ commodity and indirectly reduce the purchases of that commodity back to
+ the expected ratio.
+ A lower mutual information index could then imply increased market efficiency.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/OptionsMI.png
+	lyxscale 70
+	scale 60
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Mutual information between option trading volume and put/call ratio
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Option-Mutual-information"
+
+\end_inset
+
+ 
 \end_layout
 
 \end_inset

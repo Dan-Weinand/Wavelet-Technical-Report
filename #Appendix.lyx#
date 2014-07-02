@@ -149,7 +149,7 @@ From this we see that the orthogonality of the functions is maintained so
 \end_layout
 
 \begin_layout Section
-Original Data
+Original data and processing
 \end_layout
 
 \begin_layout Subsection
@@ -367,8 +367,6 @@ Data processing scripts
 
 \begin_layout Standard
 All of the following scripts were writtin in the R programming language.
- They assume that the folder containing the data set has been downloaded
- and is in the working directory.
 \end_layout
 
 \begin_layout Subsection
@@ -387,17 +385,8 @@ library(data.table)
 
 \begin_layout Plain Layout
 
-#Load in the raw stock data file 
-\end_layout
-
-\begin_layout Plain Layout
-
-NormData <- fread(paste(
-\end_layout
-
-\begin_layout Plain Layout
-
-		"quantquote_daily_sp500_83986
+#Load in the raw stock data file NormData <- fread(paste("quantquote_daily_sp500
+_83986
 \backslash
 
 \backslash
@@ -405,12 +394,7 @@ daily
 \backslash
 
 \backslash
-table_",
-\end_layout
-
-\begin_layout Plain Layout
-
-		tickerName, ".csv", sep = ''))
+table_", tickerName, ".csv", sep = ''))
 \end_layout
 
 \begin_layout Plain Layout
@@ -538,12 +522,8 @@ NormData$Volume <- log(NormData$Volume)
 
 \begin_layout Plain Layout
 
-volVtime <- lm(NormData$Volume ~ NormData$Date) 
-\end_layout
-
-\begin_layout Plain Layout
-
-NormData$Volume <- resid(volVtime)
+volVtime <- lm(NormData$Volume ~ NormData$Date) NormData$Volume <- resid(volVtim
+e)
 \end_layout
 
 \begin_layout Plain Layout
@@ -553,352 +533,22 @@ remove(volVtime)
 
 \begin_layout Plain Layout
 
-\end_layout
-
-\begin_layout Plain Layout
-
 # Normalize volume and close price about their mean & st.
- dev 
+ dev NormData$Volume <-(NormData$Volume - mean(NormData$Volume))/ sd(NormData$Vo
+lume) NormData$Close <-(NormData$Close - mean(NormData$Close))/ sd(NormData$Clos
+e)
 \end_layout
 
 \begin_layout Plain Layout
 
-NormData$Volume <-(NormData$Volume - mean(NormData$Volume))/ sd(NormData$Volume)
- 
+setnames(x = NormData, old = c("Date", "High", "Low", "Close",         
+                        "Volume", "Variability"),          new = c("Date",
+ "HighPercentChange", "LowPercentChange",                   "ClosePercentChange"
+, "NormVolume", "Variability"))
 \end_layout
 
 \begin_layout Plain Layout
 
-NormData$Close <-(NormData$Close - mean(NormData$Close))/ sd(NormData$Close)
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-setnames(x = NormData, old = c("Date", "High", "Low", "Close", "Volume",
-\end_layout
-
-\begin_layout Plain Layout
-
-	"Variability"), new = c("Date", "HighPercentChange", 
-\end_layout
-
-\begin_layout Plain Layout
-
-	"LowPercentChange", "ClosePercentChange", "NormVolume", "Variability"))
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection
-normManyStocks.R
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-
-# Normalize 50 stocks' information and combine them 
-\end_layout
-
-\begin_layout Plain Layout
-
-# into a data table sorted by date
-\end_layout
-
-\begin_layout Plain Layout
-
-companyTickers = c('hum', 'csc', 'xrx', 'unh',
-\end_layout
-
-\begin_layout Plain Layout
-
-                    'low', 'cat', 'tyc', 'nke', 'schw',
-\end_layout
-
-\begin_layout Plain Layout
-
-                   'symc', 'adi', 'wmt', 'pg', 'txn',
-\end_layout
-
-\begin_layout Plain Layout
-
-                   'spls', 'ppg', 'wfm', 'xlnx', 'sbux',
-\end_layout
-
-\begin_layout Plain Layout
-
-                   'clx', 'bcr', 'wfc', 'bmy', 'avy',
-\end_layout
-
-\begin_layout Plain Layout
-
-                   'stj', 'slb', 'ms', 'abt', 'aa',
-\end_layout
-
-\begin_layout Plain Layout
-
-                   'see', 'hal', 'pki', 'hrl', 'sial',
-\end_layout
-
-\begin_layout Plain Layout
-
-                   'cvs', 'f', 'gww', 'aet', 'hrs',
-\end_layout
-
-\begin_layout Plain Layout
-
-                   'pnw', 'pbi', 'luv', 'dte', 'rok',
-\end_layout
-
-\begin_layout Plain Layout
-
-                   'gps', 'shw', 'mwv', 'aee', 'bby')
-\end_layout
-
-\begin_layout Plain Layout
-
-tickerName = 'altr'
-\end_layout
-
-\begin_layout Plain Layout
-
-source('NormalizeStocks.R')
-\end_layout
-
-\begin_layout Plain Layout
-
-allStockData = NormData
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-for (tickerName in companyTickers){
-\end_layout
-
-\begin_layout Plain Layout
-
-  source('NormalizeStocks.R')
-\end_layout
-
-\begin_layout Plain Layout
-
-  allStockData <- rbind(allStockData, NormData)
-\end_layout
-
-\begin_layout Plain Layout
-
-} 
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-# Reorder the data based on its chronological order
-\end_layout
-
-\begin_layout Plain Layout
-
-allStockData <- allStockData[order(Date)]
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-# Remove unnecessary variables and write to file
-\end_layout
-
-\begin_layout Plain Layout
-
-allStockData$Date <- NULL
-\end_layout
-
-\begin_layout Plain Layout
-
-allStockData$HighPercentChange <- NULL
-\end_layout
-
-\begin_layout Plain Layout
-
-allStockData$LowPercentChange <- NULL
-\end_layout
-
-\begin_layout Plain Layout
-
-allStockData$Variability <- NULL
-\end_layout
-
-\begin_layout Plain Layout
-
-write.csv(allStockData, file = "closeVolume.csv", row.names = F)
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-# Plot the time invariant relationship
-\end_layout
-
-\begin_layout Plain Layout
-
-plot(allStockData$NormVolume, allStockData$Close, 
-\end_layout
-
-\begin_layout Plain Layout
-
-	main = "Trading Volume vs Price Change", xlab = "Trading Volume",
-\end_layout
-
-\begin_layout Plain Layout
-
-	ylab = "Price Change", pch = '.')
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection
-normalizeOptions.R
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-
-# Script to read in and normalize the put/call volumes and ratios
-\end_layout
-
-\begin_layout Plain Layout
-
-totalpc <- read.csv("~/totalpc.csv", stringsAsFactors=FALSE) 
-\end_layout
-
-\begin_layout Plain Layout
-
-totalpc$TOTAL <-(totalpc$TOTAL - mean(totalpc$TOTAL))/ sd(totalpc$TOTAL)
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-# It is necessary to take the log of the ratio so that a ratio of t and
- 1/t
-\end_layout
-
-\begin_layout Plain Layout
-
-# are seen as equally far from 0 
-\end_layout
-
-\begin_layout Plain Layout
-
-totalpc$LogP.C.Ratio <- log(totalpc$P.C.Ratio)
-\end_layout
-
-\begin_layout Plain Layout
-
-totalpc$LogP.C.Ratio <-(totalpc$LogP.C.Ratio - 
-\end_layout
-
-\begin_layout Plain Layout
-
-	mean(totalpc$LogP.C.Ratio))/ sd(totalpc$LogP.C.Ratio)
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-# Remove unused variables 
-\end_layout
-
-\begin_layout Plain Layout
-
-totalpc$PUTS <- NULL 
-\end_layout
-
-\begin_layout Plain Layout
-
-totalpc$CALLS <- NULL 
-\end_layout
-
-\begin_layout Plain Layout
-
-totalpc$DATE <- NULL
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-# Write to data file
-\end_layout
-
-\begin_layout Plain Layout
-
-write.csv(totalpc, file = "optionsVolume.csv", row.names = F)
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-# Plot the time invariant relationship
-\end_layout
-
-\begin_layout Plain Layout
-
-plot(totalpc$TOTAL, totalpc$P.C.Ratio, 
-\end_layout
-
-\begin_layout Plain Layout
-
-	main = "Option volume vs log(Put/Call ratio)", 
-\end_layout
-
-\begin_layout Plain Layout
-
-	xlab = "Option volume", ylab = "log(Put/Call ratio)")
 \end_layout
 
 \end_inset

@@ -1,0 +1,532 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass spie
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Subsection
+Multiresolution Analysis
+\end_layout
+
+\begin_layout Standard
+Wavelets can be introduced in two major ways: one is through the continous
+ wavelet transform and another is through multiresolution analysis.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Jawerth1993"
+
+\end_inset
+
+ The concept of muliresolution analysis was first introduced by Stephane
+ Mallat and Yves Meyer in the late 80's and was first applied to image processin
+g.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Mallat89"
+
+\end_inset
+
+.
+ In image processing, images can be analyzed at different resolutions with
+ each higer resolution providing finer details on the image being analyzed.
+ It is not possible to analyze an image completely at only one predefined
+ resolution and , therefore, one can reorganize the image information into
+ sets of image details appearing at different resolutions.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Mallat89"
+
+\end_inset
+
+With this setup, an image analyzed at a resolution 
+\begin_inset Formula $j+1$
+\end_inset
+
+, 
+\begin_inset Formula $j\in\mathbb{Z},$
+\end_inset
+
+contains more details than the same image analyzed at resolution 
+\begin_inset Formula $j$
+\end_inset
+
+.
+ The details of the image at resolution 
+\begin_inset Formula $j+1$
+\end_inset
+
+are therefore defined as the difference of information between the approximation
+ for the image at resolution 
+\begin_inset Formula $j+1$
+\end_inset
+
+and its approximation at the lower resolution 
+\begin_inset Formula $j$
+\end_inset
+
+.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Mallat89"
+
+\end_inset
+
+Usually, in the analysis of an image, one would start the analysis at a
+ coarse resolution 
+\begin_inset Formula $j_{0}$
+\end_inset
+
+, which is a resolution level that provides the overall structure of the
+ image, and then incrementally change the resolution to obtain finer details.
+\end_layout
+
+\begin_layout Standard
+Given this setup, Mallat introduced orthogonal wavelet bases, in the context
+ of multiresolution analysis, as a direct sum decomposition of the 
+\begin_inset Formula $L^{2}(\mathbb{R})$
+\end_inset
+
+ into a sequence of closed subspaces 
+\begin_inset Formula $\{V_{j},j\in\mathbb{Z}\}$
+\end_inset
+
+such that:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+(i)\;\;\;\forall j\in\mathbb{Z},V_{j}\subset V_{j+1}
+\]
+
+\end_inset
+
+ In other terms, 
+\begin_inset Formula $\cdots\subset V_{-1}\subset V_{0}\subset V_{1}\subset\cdots$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The subspaces 
+\begin_inset Formula $V_{j}$
+\end_inset
+
+are embedded within each other such that if 
+\begin_inset Formula $f(x)\in V_{j},$
+\end_inset
+
+ then 
+\begin_inset Formula $f(2x)\in V_{j+1}.$
+\end_inset
+
+ In the example of image processing, if one starts the analysis in 
+\begin_inset Formula $V_{0},$
+\end_inset
+
+ moving to 
+\begin_inset Formula $V_{1}$
+\end_inset
+
+will yield more details of the analyzed image or finer features of the image.
+ On the other hand, moving to 
+\begin_inset Formula $v_{-1}$
+\end_inset
+
+will yield broader features of the image being analyzed.
+ Similarly, in a time signal, the high frequency content of the signal can
+ be obtained at higher resolutions whereas low frequency content can be
+ obtained at lower resolutions.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+(ii)]\;\;\;\bigcup_{j=-\infty}^{\infty}V_{j}=is\; dense\; in\; L^{2}(\mathbb{R})
+\]
+
+\end_inset
+
+ This means that any function in 
+\begin_inset Formula $L^{2}(\mathbb{R})$
+\end_inset
+
+ can be completely represented using the bases our the 
+\begin_inset Formula $V_{m}$
+\end_inset
+
+ subpaces.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+(iii)\;\;\;\bigcap_{j\in\mathbb{Z}}V_{j}=\{0\}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This property suggests that given a resolution level 
+\begin_inset Formula $n$
+\end_inset
+
+ and a subspace 
+\begin_inset Formula $V_{n}$
+\end_inset
+
+, the signal content at this resolution 
+\begin_inset Formula $n$
+\end_inset
+
+ does not intersect with the content at the next resolution or, simply,
+ the signal content at resolution 
+\begin_inset Formula $n+1$
+\end_inset
+
+ is hidden to the content at resolution 
+\begin_inset Formula $n$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+(iv)
+\]
+
+\end_inset
+
+there exists a function 
+\begin_inset Formula $\phi\in V_{0}$
+\end_inset
+
+ with 
+\begin_inset Formula $\phi_{0,n}=\phi(x-n)$
+\end_inset
+
+ such that the family 
+\begin_inset Formula $\{\phi(x-k),\; k\in\mathbb{Z}\}$
+\end_inset
+
+is an orthogonal basis for 
+\begin_inset Formula $V_{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $||f||^{2}=\int_{-\infty}^{\infty}|f(x)|^{2}dx=\sum|\langle f(x),\;\phi_{0,n}(x)|^{2}.$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+If
+\begin_inset Formula 
+\[
+\phi_{j,k}(x)=2^{j/2}\phi(2^{j}x-k),
+\]
+
+\end_inset
+
+then the familty 
+\begin_inset Formula $\{\phi_{j,k}(x)=2^{j/2}\phi(2^{j}x-k\}$
+\end_inset
+
+ is an orthogonal basis for 
+\begin_inset Formula $V_{j}.$
+\end_inset
+
+ 
+\begin_inset Formula $\phi$
+\end_inset
+
+ is called 
+\begin_inset Formula $father\; wavelet$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+(v)\;\;\; V_{j+1}=V_{j}+W_{j},\; j\in\mathbb{Z}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $W_{j}$
+\end_inset
+
+ denotes the closure of the linear span of 
+\begin_inset Formula $\{\varphi_{j,k}:\; k\in\mathbb{Z}\}$
+\end_inset
+
+ and 
+\begin_inset Formula $\varphi_{j,k}$
+\end_inset
+
+ representing any wavelet.
+\end_layout
+
+\begin_layout Standard
+If we let 
+\begin_inset Formula $A_{j}$
+\end_inset
+
+be the operator that approximates a function 
+\begin_inset Formula $f$
+\end_inset
+
+ at a resolution level 
+\begin_inset Formula $j$
+\end_inset
+
+, then 
+\begin_inset Formula $A_{j}$
+\end_inset
+
+is the orthogonal projection operator onto the space 
+\begin_inset Formula $V_{j}$
+\end_inset
+
+such that 
+\begin_inset Formula 
+\[
+A_{j}f=\sum_{j}C_{j,k}\phi_{j,k}
+\]
+
+\end_inset
+
+ where the coeffcients 
+\begin_inset Formula $C_{j,k}$
+\end_inset
+
+ are the coefficients of the dilated and translated wavelet bases at resolution
+ 
+\begin_inset Formula $j$
+\end_inset
+
+.
+ The coefficients 
+\begin_inset Formula $C_{j,k}$
+\end_inset
+
+are obtained by projecting the function 
+\begin_inset Formula $f$
+\end_inset
+
+ onto the wavelet bases 
+\begin_inset Formula $\phi_{j,k}$
+\end_inset
+
+.
+ Therefore, 
+\begin_inset Formula $C_{j,k}=\langle f,\;\phi_{j,k}\rangle.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+At each resolution 
+\begin_inset Formula $j$
+\end_inset
+
+ we can find the approximation 
+\begin_inset Formula $\hat{f_{j}}$
+\end_inset
+
+ of 
+\begin_inset Formula $f$
+\end_inset
+
+ as given by 
+\begin_inset Formula $\hat{f_{j}}=A_{j}f$
+\end_inset
+
+ .
+ At a higher resolution 
+\begin_inset Formula $j+1$
+\end_inset
+
+, the approximation of 
+\begin_inset Formula $f$
+\end_inset
+
+ is obtained by adding to 
+\begin_inset Formula $\hat{f_{j}}$
+\end_inset
+
+some additional details about 
+\begin_inset Formula $f$
+\end_inset
+
+.
+ These details can be modeled at resolution 
+\begin_inset Formula $j$
+\end_inset
+
+ by 
+\begin_inset Formula $W_{j}$
+\end_inset
+
+, the orthogonal complement of 
+\begin_inset Formula $V_{j}$
+\end_inset
+
+ in 
+\begin_inset Formula $V_{j+1}.$
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Vannucci95"
+
+\end_inset
+
+Therefore, 
+\begin_inset Formula 
+\begin{equation}
+V_{j}=\bigoplus_{-\infty}^{j-1}W_{j}\label{eq:wav1}
+\end{equation}
+
+\end_inset
+
+Then 
+\begin_inset Formula 
+\[
+L^{2}(\mathbb{R})=\bigoplus_{j\in\mathbb{Z}}W_{j}=V_{j_{0}}\oplus\bigoplus_{j\ge j_{o}}W_{j}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The projection of 
+\begin_inset Formula $f$
+\end_inset
+
+ onto the 
+\begin_inset Formula $V_{0}$
+\end_inset
+
+ space is given by 
+\begin_inset Formula 
+\[
+\sum_{k}C_{j_{0},k}\phi_{j_{0},k}(x)
+\]
+
+\end_inset
+
+ which provides the approximation of the function 
+\begin_inset Formula $f$
+\end_inset
+
+ at the coarse resolution 
+\begin_inset Formula $j_{0}$
+\end_inset
+
+ with 
+\begin_inset Formula $\phi_{j_{0},k}(x)=2^{j_{0}/2}\phi(2^{j_{0}}x-k)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Given the functions 
+\begin_inset Formula $\psi_{j,k}=2^{j/2}\psi(2^{j}x-k)$
+\end_inset
+
+ such that the family 
+\begin_inset Formula $\{\psi_{j,k}(x),\; j,k\in\mathbb{Z}\}$
+\end_inset
+
+ is an orthogonal basis for 
+\begin_inset Formula $W_{j}$
+\end_inset
+
+ then the function 
+\begin_inset Formula 
+\[
+f(x)=\sum_{k}C_{j_{o},k}\phi_{j_{0},k}(x)\;\;+\;\;\sum_{j\ge j_{0}}\sum_{k}D_{j,k}\psi_{j,k}(x)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

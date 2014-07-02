@@ -70,11 +70,13 @@ In the present information economy, the colossal amounts of data generated
  data, and wavelets serve as the building blocks on which this data-driven
  framework will be built.
  The goal of this project is to develop a computational implementation of
- this wavelet density estimation framework and showcase its utility on a
- desirable application.
+ this wavelet density estimation framework and showcase its utility on modeling
+ several market related variables.
  In the following report, we begin with a background of wavelet theory and
  density estimation, then describe the computational framework involved
  in this process.
+ We then describe the actual application created and finish with an analysis
+ of the estimator on several data sets.
 \end_layout
 
 \begin_layout Standard

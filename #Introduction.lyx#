@@ -64,6 +64,7 @@ figs-within-sections
 \html_math_output 0
 \html_css_as_file 0
 \html_be_strict false
+\author -2130722577 "dweinand" 
 \end_header
 
 \begin_body
@@ -294,7 +295,9 @@ key "Burrus97"
  The wavelet transform is widely used in signal processing when the signal
  of interest has locally important information.
  Since wavelets can have finite supports, and are guaranteed to have finite
- energies, they are more suited to capturing sharp variations.
+ energies, 
+\change_inserted -2130722577 1404222737
+they are more suited to capturing sharp variations.
  This is due to the fact that these sharp transitions may be described by
  the relatively small number of wavelets with significantly non-zero value
  during the variation.
@@ -307,8 +310,9 @@ key "Burrus97"
 \end_inset
 
  waves of the Fourier transform support the entire number line and therefore
- it is difficult to isolate a sharp variation by scaling the waves without
- losing performance elsewhere in the approximation.
+ it is difficult to isolate a sha
+\change_unchanged
+
 \end_layout
 
 \begin_layout Standard
@@ -316,12 +320,12 @@ Approximating a function
 \begin_inset Formula $f(t)$
 \end_inset
 
- can be done through the use of scaling basis functions (
+ is done through the use of scaling basis functions (
 \begin_inset Formula $\phi$
 \end_inset
 
 ) which capture the average value of the function by a combination of scaling
- and translation of the basis function.
+ and translation of the basis functions.
  If we let 
 \begin_inset Formula $j$
 \end_inset

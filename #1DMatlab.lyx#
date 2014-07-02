@@ -845,16 +845,6 @@ The extension into 3-dimensional data made visualization extremely difficult.
  Furthermore, this density is allowed to change throughout time.
  In the end, we decided to allow the user to specify the value of the isocontour
  to display at each update period.
- An example of the display is shown in Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Isosurface"
-
-\end_inset
-
-.
- All isosurfaces of a 3-dimensional Gaussian should be spheres, and the
- estimator succeeds on this front.
 \end_layout
 
 \begin_layout Standard
@@ -871,7 +861,6 @@ status open
 \align center
 \begin_inset Graphics
 	filename figures/isoGauss.png
-	scale 80
 
 \end_inset
 
@@ -879,14 +868,7 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Isosurface of a 3-dimensional uncorrelated Gaussian 
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Isosurface"
-
-\end_inset
-
-
+Isosurface of a 3-dimensional uncorrelated Gaussian
 \end_layout
 
 \end_inset

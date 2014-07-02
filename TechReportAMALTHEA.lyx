@@ -54,7 +54,7 @@
 % Further information about the authors, other than their 
 % institution and addresses, should be included as a footnote, 
 % which is facilitated by the \authorinfo{} command.
-\authorinfo{ AMALTHEA REU Technical Report No. 2013--\hl{X}; available at \href{http://www.amalthea-reu.org}{www.amalthea-reu.org}. Please send your correspondence to Georgios C. Anagnostopoulos. Copyright \copyright\ 2013 %--\the\year\  % DO NOT UNCOMMENT THIS LINE; for future use.
+\authorinfo{ AMALTHEA REU Technical Report No. 2014--\hl{4}; available at \href{http://www.amalthea-reu.org}{www.amalthea-reu.org}. Please send your correspondence to Georgios C. Anagnostopoulos. Copyright \copyright\ 2014 %--\the\year\  % DO NOT UNCOMMENT THIS LINE; for future use.
 The AMALTHEA REU Program.   
 } 
 
@@ -168,6 +168,16 @@ filename "Introduction.lyx"
 \begin_layout Standard
 \begin_inset CommandInset include
 LatexCommand input
+filename "multires.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand input
 filename "1DMatlab.lyx"
 
 \end_inset
@@ -178,7 +188,18 @@ filename "1DMatlab.lyx"
 \begin_layout Standard
 \begin_inset CommandInset include
 LatexCommand input
+preview true
 filename "1D_Java.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand input
+filename "2D_Java.lyx"
 
 \end_inset
 
