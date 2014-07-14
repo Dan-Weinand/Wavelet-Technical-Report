@@ -52,11 +52,12 @@
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
-\tracking_changes false
+\tracking_changes true
 \output_changes false
 \html_math_output 0
 \html_css_as_file 0
 \html_be_strict false
+\author 236236747 "mmoyou" 
 \end_header
 
 \begin_body
@@ -136,6 +137,17 @@ We assume that data has been collected previously and processed into a set
 
 \begin_layout Subsection
 Calculate Valid translates
+\change_inserted 236236747 1404748159
+
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Calculate-Valid-translates"
+
+\end_inset
+
+
+\change_unchanged
+
 \end_layout
 
 \begin_layout Standard
@@ -234,12 +246,23 @@ Also, the majority of the wavelet families used in this implementation of
 
 \begin_layout Subsection
 Estimate Coefficients
+\change_inserted 236236747 1404748152
+
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Estimate-Coefficients"
+
+\end_inset
+
+
+\change_unchanged
+
 \end_layout
 
 \begin_layout Standard
-The bulk of the coding complexity falls into this section.All the coefficients
- are initialized at zero and then begin to build up from there as described
- in equation (
+The bulk of the coding complexity falls into this section.
+ All the coefficients are initialized at zero and then begin to build up
+ from there as described in equation (
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:Decay Update"
@@ -306,8 +329,14 @@ The sliding window method considers only a finite section of the total data
 \end_layout
 
 \begin_layout Standard
-The decaying method of Caudle and Wegman likewise lends itself well to a
- simple recursive updating procedure.
+The decaying method of Caudle and Wegman 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Wegman06"
+
+\end_inset
+
+ likewise lends itself well to a simple recursive updating procedure.
  Specifying a decay rate 0 < 
 \begin_inset Formula $\theta$
 \end_inset
@@ -357,7 +386,7 @@ n, no closed form approximation exists.
  Due to this, a table of values defining the wavelet over its support is
  pre-emptively calculated for each type of wavelet.
  Then interpolation was used among these values to calculate the output
- of the scaling basis and wavelet basis functions.
+ of the scaling basis and wavelet basis functions at a particular value.
  Profiling of the algorithm's performance puts this interpolation (which
  must be performed here as well as in density calculation) as the bottleneck
  where most of computation time is spent.
@@ -369,12 +398,33 @@ ted value.
 
 \begin_layout Subsection
 Calculate Density
+\change_inserted 236236747 1404748143
+
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Calculate-Density"
+
+\end_inset
+
+
+\change_unchanged
+
 \end_layout
 
 \begin_layout Standard
 The computational bottleneck lies with this section.
  The actual calculation of the density is fairly simple.
- For each point x in the support, the density is given by:
+ For each point 
+\change_deleted 236236747 1404740074
+x
+\change_inserted 236236747 1404740077
+
+\begin_inset Formula $x$
+\end_inset
+
+
+\change_unchanged
+ in the support, the density is given by:
 \end_layout
 
 \begin_layout Standard
@@ -392,18 +442,24 @@ f(x)=\sum\limits _{k}c_{j_{0},k}\phi_{j_{0},k}(x)+\sum\limits _{j_{0}\leq j}\sum
 As it is plainly infeasible to calculate the density at every point in the
  support, a discretization for how frequently to calculate the density is
  selected.
- Empirical tests gives that the computational load for updating the coefficients
+ Empirical tests give that the computational load for updating the coefficients
  given one new data point is roughly equal to that for calculating the density
  of six points.
- A fine grained density function frequently evaluated can drastically slow
- down the algorithm.
- Likewise, having a coarser grained discretization and reducing the frequency
- at which the entire density is calculated both significantly speed up the
- algorithm.
+ A finely discretized density function frequently evaluated can drastically
+ slow down the algorithm.
+ Likewise, having a large discretization and reducing the frequency at which
+ the entire density is calculated both significantly speed up the algorithm.
 \end_layout
 
 \begin_layout Subsection
 Normalize Density
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Normalize-Density"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -412,7 +468,14 @@ While the above calculations will give the proper shape for the density,
  Regions sparse in data may have negative densities and the integral over
  the region almost certainly does not sum to unity.
  In order to correct these types of errors, we use the iterative method
- for improving density methods described in Gajek 1986.
+ for improving density methods described in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Gajek86"
+
+\end_inset
+
+.
  The essence of the method is to first set all negative values in the density
  to zero, then force the function to integrate to one, and continue to repeat
  until the difference between the integral and unity is less than a prespecified
@@ -420,13 +483,32 @@ While the above calculations will give the proper shape for the density,
 \begin_inset Formula $\varepsilon$
 \end_inset
 
-.
+ (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:Normalization-of-Density"
+
+\end_inset
+
+).
  To be more precise, the algorithm is defined as follows where 
 \begin_inset Formula $f_{k}$
 \end_inset
 
- is the kth approximation for the true density function and h(x) is the
- weight function at x.
+ is the 
+\begin_inset Formula $k$
+\end_inset
+
+th approximation for the true density function and 
+\begin_inset Formula $h(x)$
+\end_inset
+
+ is the weight function at 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ A uniform weight function was used in our implementation.
 \end_layout
 
 \begin_layout Standard
@@ -444,6 +526,17 @@ status open
 
 \begin_layout Plain Layout
 Normalization of Density Estimate
+\change_inserted 236236747 1404740345
+
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:Normalization-of-Density"
+
+\end_inset
+
+
+\change_unchanged
+
 \end_layout
 
 \end_inset
@@ -693,6 +786,17 @@ while
 
 \begin_layout Subsection
 Extension to Higher Dimensional Data
+\change_inserted 236236747 1404748126
+
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Extension-to-Higher dimensions"
+
+\end_inset
+
+
+\change_unchanged
+
 \end_layout
 
 \begin_layout Standard
@@ -724,7 +828,7 @@ th resolution level.
 \end_inset
 
 .
- The wavelet and scaling basis functions in 
+ The scaling basis functions in 
 \begin_inset Formula $m$
 \end_inset
 
@@ -734,7 +838,7 @@ th resolution level.
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-\varphi_{j,k_{1},k_{2}...k_{m}}^{m}(x_{1},x_{2},...,x_{m})=\varphi_{j,k_{1}}(x_{1})\varphi_{j,k_{2}}(x_{2})...\varphi_{j,k_{m}}(x_{m})\label{eq:Multidimensional varphi as tensor product}
+\phi_{j,k_{1},k_{2}...k_{m}}(x_{1},x_{2},...,x_{m})=\phi_{j,k_{1}}(x_{1})\phi_{j,k_{2}}(x_{2})...\phi_{j,k_{m}}(x_{m})\label{eq:Multidimensional varphi as tensor product}
 \end{equation}
 
 \end_inset
@@ -759,7 +863,8 @@ From this we can see that it is necessary to have a coefficient
 \begin_inset Formula $\phi$
 \end_inset
 
- function, with 2-dimensional wavelets we have 
+ function, with 2-dimensional wavelets we have the tensor product combinations
+ of the 1D functions 
 \begin_inset Formula $\phi_{1}\phi_{2}$
 \end_inset
 
@@ -775,7 +880,7 @@ From this we can see that it is necessary to have a coefficient
 \begin_inset Formula $\psi_{1}\psi_{2}$
 \end_inset
 
- functions.
+ .
 \end_layout
 
 \begin_layout Standard
@@ -787,10 +892,18 @@ In the 2-dimensional Matlab prototype, the algorithms discussed work in
  of its time calculating the densities once the coefficients were known.
  In particular, vast amounts of time were spent interpolating amongst the
  
-\begin_inset Formula $\phi$
+\begin_inset Formula $\varphi$
 \end_inset
 
- tables.
+ tables
+\change_inserted 236236747 1404741686
+ (
+\begin_inset Formula $\varphi$
+\end_inset
+
+ represents both scaling and wavelet basis function tables)
+\change_unchanged
+.
  Since the meshgrid across which we define our density approximation does
  not change, we can initially calculate all of these interpolations which
  we need given the support range and discretization (merely looking up these
@@ -798,6 +911,18 @@ In the 2-dimensional Matlab prototype, the algorithms discussed work in
  This resulted in speedup of several orders of magnitude, and plotting the
  density function for 2-dimensional data now occurs close to interactive
  speeds.
+
+\change_inserted 236236747 1404741919
+ An example of a 2D density plot is shown in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Matlab-2-D-Prototype"
+
+\end_inset
+
+
+\change_unchanged
+
 \end_layout
 
 \begin_layout Standard
@@ -808,10 +933,11 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Graphics
 	filename figures/Matlab2D3peakedGauss.png
 	lyxscale 50
-	scale 40
+	scale 37
 
 \end_inset
 
@@ -819,7 +945,19 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Matlab 2-D Prototype performance at approximating a 3 Gaussian mixture model
+Matlab 2-D Prototype performance at approximating a tri-modal Gaussian mixture
+ model
+\change_inserted 236236747 1404741837
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Matlab-2-D-Prototype"
+
+\end_inset
+
+
+\change_unchanged
+
 \end_layout
 
 \end_inset
@@ -859,6 +997,7 @@ reference "fig:Isosurface"
 
 \begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status open
@@ -871,7 +1010,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename figures/isoGauss.png
-	scale 80
+	scale 60
 
 \end_inset
 

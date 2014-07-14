@@ -51,7 +51,7 @@
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
-\tracking_changes false
+\tracking_changes true
 \output_changes false
 \html_math_output 0
 \html_css_as_file 0
@@ -62,6 +62,13 @@
 
 \begin_layout Subsection
 Multiresolution Analysis
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Multiresolution-Analysis"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -84,18 +91,18 @@ key "Mallat89"
 
 .
  In image processing, images can be analyzed at different resolutions with
- each higer resolution providing finer details on the image being analyzed.
+ each higher resolution providing finer details on the image being analyzed.
  It is not possible to analyze an image completely at only one predefined
- resolution and , therefore, one can reorganize the image information into
- sets of image details appearing at different resolutions.
- 
+ resolution; therefore, one can reorganize the image information into sets
+ of image details appearing at different resolutions 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Mallat89"
 
 \end_inset
 
-With this setup, an image analyzed at a resolution 
+.
+ With this setup, an image analyzed at a resolution 
 \begin_inset Formula $j+1$
 \end_inset
 
@@ -112,8 +119,8 @@ contains more details than the same image analyzed at resolution
 \begin_inset Formula $j+1$
 \end_inset
 
-are therefore defined as the difference of information between the approximation
- for the image at resolution 
+ are therefore defined as the difference of information between the approximatio
+n for the image at resolution 
 \begin_inset Formula $j+1$
 \end_inset
 
@@ -138,7 +145,7 @@ Usually, in the analysis of an image, one would start the analysis at a
 \end_layout
 
 \begin_layout Standard
-Given this setup, Mallat introduced orthogonal wavelet bases, in the context
+Given this setup, Mallat introduced orthogonal wavelet bases in the context
  of multiresolution analysis, as a direct sum decomposition of the 
 \begin_inset Formula $L^{2}(\mathbb{R})$
 \end_inset
@@ -147,7 +154,7 @@ Given this setup, Mallat introduced orthogonal wavelet bases, in the context
 \begin_inset Formula $\{V_{j},j\in\mathbb{Z}\}$
 \end_inset
 
-such that:
+ such that:
 \end_layout
 
 \begin_layout Standard
@@ -171,7 +178,7 @@ The subspaces
 \begin_inset Formula $V_{j}$
 \end_inset
 
-are embedded within each other such that if 
+ are embedded within each other such that if 
 \begin_inset Formula $f(x)\in V_{j},$
 \end_inset
 
@@ -189,7 +196,7 @@ are embedded within each other such that if
 
 will yield more details of the analyzed image or finer features of the image.
  On the other hand, moving to 
-\begin_inset Formula $v_{-1}$
+\begin_inset Formula $V_{-1}$
 \end_inset
 
 will yield broader features of the image being analyzed.
@@ -242,7 +249,7 @@ This property suggests that given a resolution level
 \begin_inset Formula $n$
 \end_inset
 
- does not intersect with the content at the next resolution or, simply,
+ does not intersect with the content at the next resolution, or simply,
  the signal content at resolution 
 \begin_inset Formula $n+1$
 \end_inset
@@ -262,7 +269,7 @@ This property suggests that given a resolution level
 
 \end_inset
 
-there exists a function 
+There exists a function 
 \begin_inset Formula $\phi\in V_{0}$
 \end_inset
 
@@ -299,10 +306,10 @@ then the familty
 \end_inset
 
  is an orthogonal basis for 
-\begin_inset Formula $V_{j}.$
+\begin_inset Formula $V_{j}$
 \end_inset
 
- 
+ and 
 \begin_inset Formula $\phi$
 \end_inset
 
@@ -311,12 +318,17 @@ then the familty
 \end_inset
 
 .
+ The decomposition of the subspace 
+\begin_inset Formula $V_{J+1}$
+\end_inset
+
+ is given as 
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \[
-(v)\;\;\; V_{j+1}=V_{j}+W_{j},\; j\in\mathbb{Z}
+(v)\;\;\; V_{j+1}=V_{j}\oplus W_{j},\; j\in\mathbb{Z}
 \]
 
 \end_inset
@@ -329,11 +341,11 @@ where
 \begin_inset Formula $\{\varphi_{j,k}:\; k\in\mathbb{Z}\}$
 \end_inset
 
- and 
+ with 
 \begin_inset Formula $\varphi_{j,k}$
 \end_inset
 
- representing any wavelet.
+ representing any wavelet function.
 \end_layout
 
 \begin_layout Standard
@@ -341,7 +353,7 @@ If we let
 \begin_inset Formula $A_{j}$
 \end_inset
 
-be the operator that approximates a function 
+ be the operator that approximates a function 
 \begin_inset Formula $f$
 \end_inset
 
@@ -357,7 +369,7 @@ is the orthogonal projection operator onto the space
 \begin_inset Formula $V_{j}$
 \end_inset
 
-such that 
+ such that 
 \begin_inset Formula 
 \[
 A_{j}f=\sum_{j}C_{j,k}\phi_{j,k}
@@ -379,7 +391,7 @@ A_{j}f=\sum_{j}C_{j,k}\phi_{j,k}
 \begin_inset Formula $C_{j,k}$
 \end_inset
 
-are obtained by projecting the function 
+ are obtained by projecting the function 
 \begin_inset Formula $f$
 \end_inset
 
@@ -425,7 +437,7 @@ At each resolution
 \begin_inset Formula $\hat{f_{j}}$
 \end_inset
 
-some additional details about 
+ some additional details about 
 \begin_inset Formula $f$
 \end_inset
 
@@ -443,7 +455,7 @@ some additional details about
 \end_inset
 
  in 
-\begin_inset Formula $V_{j+1}.$
+\begin_inset Formula $V_{j+1}$
 \end_inset
 
 
@@ -453,7 +465,8 @@ key "Vannucci95"
 
 \end_inset
 
-Therefore, 
+.
+ Therefore, 
 \begin_inset Formula 
 \begin{equation}
 V_{j}=\bigoplus_{-\infty}^{j-1}W_{j}\label{eq:wav1}
@@ -461,10 +474,10 @@ V_{j}=\bigoplus_{-\infty}^{j-1}W_{j}\label{eq:wav1}
 
 \end_inset
 
-Then 
+Then
 \begin_inset Formula 
 \[
-L^{2}(\mathbb{R})=\bigoplus_{j\in\mathbb{Z}}W_{j}=V_{j_{0}}\oplus\bigoplus_{j\ge j_{o}}W_{j}
+L^{2}(\mathbb{R})=\bigoplus_{j\in\mathbb{Z}}W_{j}=V_{j_{0}}\oplus\;\bigoplus W_{j}
 \]
 
 \end_inset

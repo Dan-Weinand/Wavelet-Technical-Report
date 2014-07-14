@@ -62,7 +62,7 @@ figs-within-sections
 \html_math_output 0
 \html_css_as_file 0
 \html_be_strict false
-\author -2130722577 "dweinand" 
+\author 236236747 "mmoyou" 
 \end_header
 
 \begin_body
@@ -78,7 +78,7 @@ Architecture
 \begin_layout Standard
 With the 1D Matlab implementation explained, the next phase of the project
  is to implement 1D wavelet framework in a Java applet.
- In order to accomplish this we provide an overarching outlineof the necessary
+ In order to accomplish this we provide an overarching outline of the necessary
  tasks which the code needs to perform, shown in Fig.
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -98,6 +98,7 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Graphics
 	filename figures/JavaLayout.png
 	lyxscale 50
@@ -145,16 +146,12 @@ target "https://github.com/Dan-Weinand/DensityEstimation1D"
 
 \begin_layout Subsubsection
 Settings
-\change_inserted -2130722577 1404143711
-
 \begin_inset CommandInset label
 LatexCommand label
 name "sub:Settings"
 
 \end_inset
 
-
-\change_unchanged
 
 \end_layout
 
@@ -274,20 +271,14 @@ target "http://trac.erichseifert.de/gral/"
  paused.
  One advantage of the GRAL package is that their plots are implemented with
  data listeners.
- In essence the data listeners work so that, when the table
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Can you mention that the density is stored in a table previous to this
+ In essence the data listeners work so that, when the table corresponding
+ to the density at each point in the domain is updated, its plot is automaticall
+y updated.
+ 
 \end_layout
 
-\end_inset
-
- corresponding to the density at each point in the domain is updated, its
- plot is automatically updated.
- Pausing and unpausing can be done freely during the density estimation
- process.
+\begin_layout Standard
+Pausing and unpausing can be done freely during the density estimation process.
  During density estimation, the current index of the sample being evaluated
  is displayed above the plot so that the current progress is known as shown
  in Fig 
@@ -329,10 +320,10 @@ Initializing a wavelet loads the proper table of
 \begin_inset Formula $\psi$
 \end_inset
 
-values from csv files.
+ values from csv files.
  Once initialized, the inSupport function determines whether or not an incoming
  data point is supported by the wavelet.
- Furthermore, the supports methods to return the value of 
+ Furthermore, the class supports methods to return the value of 
 \begin_inset Formula $\phi$
 \end_inset
 
@@ -533,7 +524,11 @@ n once the coefficients were known.
  With this in mind, we are setting the default update frequency in the applet
  to read more samples between updates to the plot.
  Even without this modification, the unoptimized Java code already ran significa
-ntly more quickly than the Matlab implementation.
+ntly faster
+\change_deleted 236236747 1404745029
+ 
+\change_unchanged
+ than the Matlab implementation.
  An early time trial gave a rate of 1 million samples every four and a half
  minutes.
  Settings were as follows: data drawn from a normal distribution (mean 0
@@ -583,7 +578,14 @@ The resolution to select is arguably the most important parameter.
  and stopping resolutions.
  In light of this, we allow the user to select real valued resolutions.
  For a proof of the orthogonality of arbitrary starting resolution see Appendix
- A.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Orthogonality"
+
+\end_inset
+
+.
  
 \end_layout
 

@@ -4,6 +4,7 @@
 \begin_header
 \textclass spie
 \use_default_options true
+\master TechReportAMALTHEA.lyx
 \maintain_unincluded_children false
 \language english
 \language_package default
@@ -130,7 +131,14 @@ name "fig:Java-2-D-Applet"
 The essential theory behind this 2-D Java implementation of the density
  estimator is the extension of wavelet-based density estimator to higher
  dimensions.
- This extension to higher dimension is discussed in section 3.6.
+ This extension to higher dimension is discussed in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Extension-to-Higher dimensions"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard

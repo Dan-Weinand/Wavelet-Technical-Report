@@ -79,6 +79,13 @@ name "sec:Conclusions"
 \end_layout
 
 \begin_layout Standard
+As researchers, this project has improved our understanding of signal processing
+, density estimation, nonparametric statistics, and many other areas.
+ At the beginning of the experience, we were completely unfamiliar with
+ the topic area 
+\end_layout
+
+\begin_layout Standard
 The report covers the steps we took to address the problem of accurate and
  efficient density estimation for multi-dimensional, streaming data.
  Since streaming data has becoming increasingly common in applications ranging
@@ -92,7 +99,7 @@ The report covers the steps we took to address the problem of accurate and
  for the generating distribution to change over time, a major advantage
  in many applications.
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Talk about more or less the journey you guys took.
@@ -104,10 +111,7 @@ Talk about more or less the journey you guys took.
  Give some personal tidbits or comments on the research project itself as
  a last line so the NSF people will feel as if you got something out of
  it, which I hope you did.
- (Dan's reply) I understand the journey comment, and I've definitely learned
- a TON from this project, but I'm not entirely sure if those comments fit
- in a technical report, perhaps we could discuss with Dr.
- A or someone?
+ 
 \end_layout
 
 \end_inset

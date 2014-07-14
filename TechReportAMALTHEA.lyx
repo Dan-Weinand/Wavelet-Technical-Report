@@ -33,21 +33,23 @@
 % first word, proper nouns, and acronyms should be capitalized.  Avoid using
 % acronyms in the title, if you can. Keep in mind that people outside your area 
 % of expertise might read your article.
-\title{AMALTHEA REU Technical Report Template\\}  
+\title{Wavelet based density estimation for multidimensional streaming data\\}  
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% AUTHORS
 % Specify the list of authors and their affiliations (department & university name below:
-\author{Daniel Weinand\supit{a}, Gedeon Nyengele\supit{b},  Mark Moyou\supit{c}, Adrian Peter\supit{d}, and Georgios C. Anagnostopoulos\supit{e}
+\author{Daniel Weinand\supit{a}, Gedeon Nyengele\supit{b},  Mark Moyou\supit{c}, and Dr. Adrian Peter\supit{d}
 \skiplinehalf
 \small
-\supit{a}Operations Research, Florida Institute of Technology, Melbourne, Florida;
-\href{mailto:dweinand@fit.edu}{gnyengele@fit.edu} \\
-\supit{b}Computer Sciences, Florida Institute of Technology, Melbourne, Florida;
-\href{mailto:someoneelse@fit.edu}{someoneelse@fit.edu} \\
-\supit{c}Electrical \& Computer Engineering, Florida Institute of Technology, Melbourne, Florida;
-\href{mailto:georgio@fit.edu}{georgio@fit.edu} \\ 
+\supit{a}Department of Computer Science, Pomona College, Claremont, California;
+\href{mailto:daniel.weinand@pomona.edu}{daniel.weinand@pomona.edu} \\
+\supit{b}Department of Electrical Engineering, Georgia Perimeter College, Decatur, Georgia;
+\href{mailto:gedeonnyengele@hotmail.com}{gedeonnyengele@hotmail.com} \\
+\supit{c}Department of Engineering Systems, Florida Institute of Technology, Melbourne, Florida;
+\href{mailto:mmoyou@fit.edu}{mmoyou@fit.edu} \\
+\supit{d}Department of Engineering Systems, Florida Institute of Technology, Melbourne, Florida;
+\href{mailto:apeter@fit.edu}{apeter@fit.edu} \\
 }
 
 
@@ -136,9 +138,15 @@ figs-within-sections
 \begin_body
 
 \begin_layout Standard
-\begin_inset CommandInset include
-LatexCommand input
-filename "Title.lyx"
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+maketitle
+\end_layout
 
 \end_inset
 
@@ -169,6 +177,16 @@ filename "Introduction.lyx"
 \begin_inset CommandInset include
 LatexCommand input
 filename "multires.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand input
+filename "Lit Review.lyx"
 
 \end_inset
 
@@ -210,6 +228,16 @@ filename "2D_Java.lyx"
 \begin_inset CommandInset include
 LatexCommand input
 filename "Experiments.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand input
+filename "Conclusions.lyx"
 
 \end_inset
 

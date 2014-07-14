@@ -5,7 +5,7 @@
 \textclass spie
 \options nocompress
 \use_default_options false
-\master TechReportAMALTHEA
+\master TechReportAMALTHEA.lyx
 \maintain_unincluded_children false
 \language english
 \language_package none
@@ -53,30 +53,72 @@
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
-\tracking_changes false
+\tracking_changes true
 \output_changes false
 \html_math_output 0
 \html_css_as_file 0
 \html_be_strict false
+\author -2130722577 "dweinand" 
+\author 236236747 "mmoyou" 
 \end_header
 
 \begin_body
 
 \begin_layout Abstract
-In the present information economy, the colossal amounts of data generated
- daily has spawned the need for real-time data driven analysis algorithms
- that require minimal user influence.
+In the present information economy, the colossal amount of data generated
+ daily has spawned the need for real-time data driven 
+\change_deleted -2130722577 1405109547
+analysis 
+\change_unchanged
+algorithms
+\change_deleted -2130722577 1405109552
+ that require
+\change_inserted -2130722577 1405109556
+requiring
+\change_unchanged
+ minimal user influence.
  Density estimation is one path to extracting actionable intelligence from
  data, and wavelets serve as the building blocks on which this data-driven
  framework will be built.
- The goal of this project is to develop a computational implementation of
- this wavelet density estimation framework and showcase its utility on modeling
- several market related variables.
- In the following report, we begin with a background of wavelet theory and
- density estimation, then describe the computational framework involved
- in this process.
- We then describe the actual application created and finish with an analysis
- of the estimator on several data sets.
+ The goal of this project is to develop a multidimensional computational
+ implementation of this 
+\change_deleted 236236747 1405001428
+wavelet density estimation
+\change_inserted 236236747 1405001435
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted 236236747 1405001446
+
+
+\backslash
+ac{WDE}
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+ framework and showcase its utility on modeling several market related variables.
+ The report
+\change_deleted -2130722577 1405109619
+,
+\change_unchanged
+ begins with a background overview of wavelet theory and density estimation,
+ then a description of the computational framework involved in this process.
+ 
+\change_deleted -2130722577 1405109882
+Beyond this
+\change_inserted -2130722577 1405109883
+Finally
+\change_unchanged
+, we describe the application in detail and conclude with an analysis of
+ the estimator on several data sets.
 \end_layout
 
 \begin_layout Standard

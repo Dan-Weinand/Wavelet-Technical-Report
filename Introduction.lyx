@@ -64,27 +64,24 @@ figs-within-sections
 \html_math_output 0
 \html_css_as_file 0
 \html_be_strict false
+\author -2130722577 "dweinand" 
+\author 236236747 "mmoyou" 
 \end_header
 
 \begin_body
 
 \begin_layout Section
 Background
+\change_inserted -2130722577 1405109636
+
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
-status collapsed
 
-\begin_layout Plain Layout
-This is a good start, make this sound better.
- Flavor it with your msg.
- Make sure to mention that the focus is to get up to three dimensions so
- the section labels will make sense.
- Include the steps you will take, meaning 1D matlab and then 1D web and
- so on.
- 
-\end_layout
+\change_inserted -2130722577 1405109643
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Background"
 
 \end_inset
 
@@ -98,8 +95,8 @@ Layout
 \begin_layout Standard
 Before diving directly into wavelet based density estimators for streaming
  data, some background knowledge is necessary.
- First we provide a brief discussion of wavelets, their position as a basis
- for the 
+ First we provide a brief discussion of wavelets, their use as a basis for
+ the 
 \begin_inset Formula $L^{2}$
 \end_inset
 
@@ -107,18 +104,25 @@ Before diving directly into wavelet based density estimators for streaming
  This is followed by a brief description of density estimation and non-parametri
 c density estimators in particular (of which wavelet density estimators
  are one class).
- Then we briefly touch on the streaming data paradigm to transition into
+ Then, we briefly touch on the streaming data paradigm to transition into
  an analysis of two algorithms using wavelet density estimators on streaming
  data.
 \end_layout
 
 \begin_layout Subsection
 Wavelets:
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Wavelets:"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-A wavelet is a function with an average value of zero and typically a finite
- support
+A wavelet is a function with an average value of zero and finite energy
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Gargour09"
@@ -145,9 +149,12 @@ key "Gargour09"
 \begin_layout Standard
 An essential feature of this wavelet is that the inner product of the wavelet
  and any integer shift of the wavelet is equal to zero.
- In other words, the Haar wavelet is orthogonal under translation, a feature
- it shares with the other major wavelet families such as the Daubechies
- 
+ In other words, the Haar wavelet is orthogonal under
+\change_inserted -2130722577 1405109970
+ integer
+\change_unchanged
+ translation, a feature it shares with the other major wavelet families
+ such as the Daubechies 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Burrus97"
@@ -173,7 +180,19 @@ dyadic
 \end_inset
 
  wavelets which can be repeatedly halved in size in order to better approximate
- a function, allowing them to be used in multi-resolution analysis.
+ a function, allowing them to be used in multi-resolution analysis (described
+ in subsection
+\change_inserted -2130722577 1404920778
+ 
+\change_unchanged
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Multiresolution-Analysis"
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Subsection
@@ -182,6 +201,13 @@ Wavelets as a basis for the
 \end_inset
 
  function space
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Wavelets as as basis"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -190,8 +216,8 @@ The
 \end_inset
 
  function space is defined as the set of square integrable functions.
- In other words, this space is composed of functions which when their square
- is integrated from 
+ In other words, this space is composed of functions whose square when integrate
+d from 
 \begin_inset Formula $-\infty$
 \end_inset
 
@@ -199,14 +225,10 @@ The
 \begin_inset Formula $\infty$
 \end_inset
 
- will sum to less than 
-\begin_inset Formula $\infty$
-\end_inset
-
-.
+ is finite.
  Intuitively, one can see that functions in this space will only be defined
  as significantly different from zero over a relatively small interval.
- An essential features of wavelets is that they have finite energy, in fact,
+ An essential feature of wavelets is that they have finite energy, in fact,
  all wavelets square integrate to one.
  Thus wavelets fall into the 
 \begin_inset Formula $L^{2}$
@@ -222,14 +244,37 @@ n.
 \end_inset
 
  function space.
- In order to find the coordinates of any square integrable function in terms
- of the wavelet basis, we simply calculate 
-\begin_inset Formula $b_{j,k}=\left\langle f,b_{j,k}\right\rangle $
+ In order to find the coordinates (
+\begin_inset Formula $b$
+\end_inset
+
+) of any square integrable function in terms of the wavelet basis, we simply
+ calculate the inner product of respective basis function with the function.
+ Then we have 
+\begin_inset Formula $f*\varphi_{j,k}=\left\langle f,\varphi_{j,k}\right\rangle =b_{j,k}$
 \end_inset
 
 .
- This is clear from the reconstruction of the function given the wavelet
- coefficients given below.
+ The reconstruction of the function 
+\begin_inset Formula $f(x)$
+\end_inset
+
+ with the wavelet coefficients 
+\begin_inset Formula $b_{j,k}$
+\end_inset
+
+ is shown in
+\change_inserted -2130722577 1405110880
+ Equation
+\change_unchanged
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq: wavelet basis function expansion"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -246,9 +291,9 @@ n.
 \noun off
 \color none
 \begin_inset Formula 
-\[
-f(x)=\sum\limits _{j}\sum\limits _{k}b_{j,k}\psi_{j,k}(x),\quad j\in\mathbb{N}
-\]
+\begin{equation}
+f(x)=\sum\limits _{j}\sum\limits _{k}b_{j,k}\psi_{j,k}(x),\quad j\in\mathbb{N}\label{eq: wavelet basis function expansion}
+\end{equation}
 
 \end_inset
 
@@ -256,12 +301,19 @@ f(x)=\sum\limits _{j}\sum\limits _{k}b_{j,k}\psi_{j,k}(x),\quad j\in\mathbb{N}
 \end_layout
 
 \begin_layout Subsection
-The Wavelet Series Expansion:
+The Wavelet Series Expansion
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:The-Wavelet-Series"
+
+\end_inset
+
+:
 \end_layout
 
 \begin_layout Standard
-In real life, there is a large class of signals with components varying
- in both time and frequency.
+In many practical applications, there exists a large class of signals with
+ components varying in both time and frequency.
  When using a Fourier transform on these kinds of signals, this local variation
  in the signal can be lost 
 \begin_inset CommandInset citation
@@ -296,19 +348,11 @@ key "Burrus97"
  Since wavelets can have finite supports, and are guaranteed to have finite
  energies, they are more suited to capturing sharp variations.
  This is due to the fact that these sharp transitions may be described by
- the relatively small number of wavelets with significantly non-zero value
- during the variation.
- In contrast, the 
-\begin_inset Formula $sin$
-\end_inset
-
- and 
-\begin_inset Formula $cosin$
-\end_inset
-
- waves of the Fourier transform support the entire number line and therefore
- it is difficult to isolate a sharp variation by scaling the waves without
- losing performance elsewhere in the approximation.
+ the relatively small number of wavelets whose support contains the transition.
+ In contrast, the sine and cosine waves of the Fourier transform support
+ the entire number line and therefore it is difficult to isolate a sharp
+ variation by scaling the waves without losing performance elsewhere in
+ the approximation.
 \end_layout
 
 \begin_layout Standard
@@ -334,7 +378,7 @@ Approximating a function
 \begin_inset Formula $\phi)$
 \end_inset
 
- may be defined by
+ are defined as
 \end_layout
 
 \begin_layout Standard
@@ -353,12 +397,18 @@ Wavelet basis functions (
 \begin_inset Formula $\psi$
 \end_inset
 
-) complement scaling basis functions by capturing sharp jumps in 
+) complement scaling basis functions by capturing sharp jumps or abrupt
+ transitions in 
 \begin_inset Formula $f(t)$
 \end_inset
 
 .
- The essentials of this technique can be summarized with the equation
+ The approximation and detail capturing capabilities of wavelets is shown
+ in the expansion of 
+\begin_inset Formula $f(t)$
+\end_inset
+
+ below in a wavelet basis
 \end_layout
 
 \begin_layout LyX-Code
@@ -395,27 +445,8 @@ key "Heil89"
 
 \end_inset
 
-.
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Put an example with subscrips 
-\begin_inset Formula $j$
-\end_inset
-
- and or 
-\begin_inset Formula $j_{0}$
-\end_inset
-
- so the reader can see what is going on.
- 
-\end_layout
-
-\end_inset
-
- This lets us approximate the function to an arbitrarily fine degree of
- accuracy by varying 
+.This lets us approximate the function to an arbitrarily fine degree of accuracy
+ by varying 
 \begin_inset Formula $j$
 \end_inset
 
@@ -450,31 +481,25 @@ key "Burrus97"
  In this manner it is possible to recursively compute all of the coefficients
  using a bank of filters.
  
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Maybe put in what a filter bank is.
- Make this point a bit more clear or state that this is a way of interpreting
- the generation of coefficients.
- 
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsection
-(Parametric) Density Estimation:
+(Parametric) Density Estimation
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:(Parametric)-Density-Estimation:"
+
+\end_inset
+
+:
 \end_layout
 
 \begin_layout Standard
 At its core, density estimation attempts to approximate the probability
- density distribution that produces a particular random variable.
- This is a vitally important component in describing a set of data, as a
- density estimate is a readily visualized and understood statistical measure
- which provides a large quantity of information about the data studied
+ density function that of a particular random variable.
+ This is a vital component in describing a set of data, as a density estimate
+ is a readily visualized and understood statistical measure which provides
+ a large quantity of information about the data studied
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Silverman86"
@@ -508,13 +533,27 @@ key "Cramer46"
 
 \begin_layout Subsection
 Nonparametric Density Estimation:
+\change_inserted 236236747 1404705197
+
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Nonparametric-Density-Estimation"
+
+\end_inset
+
+
+\change_unchanged
+
 \end_layout
 
 \begin_layout Standard
 In contrast to parametric models, non-parametric models limit the assumptions
  which are made about the data's true distribution function.
- Typically they have a parameter which controls the smoothing of the density
- estimate.
+ Typically
+\change_inserted 236236747 1404704417
+,
+\change_unchanged
+ they have a parameter which controls the smoothing of the density estimate.
  Regardless of the model type selected, determining how much to smooth the
  estimate is an extremely important question.
 \end_layout
@@ -526,7 +565,18 @@ Histograms are arguably the simplest nonparametric density estimator.
  falls.
  Then the histogram is constructed by creating a series of rectangles with
  width of the bin size and whose height is proportional to the number of
- samples which fall into the bin.
+ samples which fall into the bin
+\change_inserted 236236747 1404704695
+ (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Histograms-for-normal"
+
+\end_inset
+
+)
+\change_unchanged
+.
  The size of the bin determines the amount of smoothing to perform.
  Large bins are insensitive to both noise and fluctuations in the density.
  
@@ -569,6 +619,17 @@ status open
 
 \begin_layout Plain Layout
 Histograms for normal data with: 15, 24 and 60 bins
+\change_inserted 236236747 1404704681
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Histograms-for-normal"
+
+\end_inset
+
+
+\change_unchanged
+
 \end_layout
 
 \end_inset
@@ -626,7 +687,18 @@ In the above equation,
 \end_inset
 
  controls the neighborhood size to be used in the kernel estimate, and thus
- determines the smoothing.
+ determines the smoothing
+\change_inserted 236236747 1404704766
+ (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Kernel-density-estimates"
+
+\end_inset
+
+)
+\change_unchanged
+.
  A large 
 \begin_inset Formula $h$
 \end_inset
@@ -671,7 +743,14 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Kernel density estimates for normal data with h = .4, 1, and 4
+Kernel density estimates for normal data with h = .4, 1, and 4 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Kernel-density-estimates"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -686,6 +765,13 @@ Kernel density estimates for normal data with h = .4, 1, and 4
 
 \begin_layout Subsection
 Orthogonal Series as Density Estimators:
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Orthogonal-Series-as density estimators"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -796,7 +882,7 @@ These orthogonal series estimates, while possessing many beneficial properties
  in density estimation such as expressing local trends and allowing for
  limited support, do not generally produce proper probability density functions.
  At times this is acceptable as we are chiefly interested in the shape of
- the distribution rather than the actual probability in an interval but
+ the distribution rather than the actual probability in an interval, but
  there are times when negative probabilities in a region may be more problematic.
  The author's of 
 \begin_inset CommandInset citation
@@ -805,7 +891,7 @@ key "Gajek86"
 
 \end_inset
 
- describes an iterative algorithm which forces a density estimator to give
+ describe an iterative algorithm which forces a density estimator to give
  true probability density functions.
  Convergence is rapid so generally a small number of iterations suffice
  to give a function which both resembles the estimate from the wavelet transform
@@ -837,6 +923,13 @@ key "Jansen95"
 
 \begin_layout Subsection
 Thresholding of Wavelet Coefficients
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Thresholding-of-Wavelet coefficients"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -846,7 +939,7 @@ When expanding a function in a wavelet basis, it can be seen that only a
  As a result of this, we expect a few relatively large coefficients while
  the majority are set to zero when analyzing the true function.
  However, noise in the sample will almost always slightly increase the absolute
- value of the coefficients which should be zero.
+ value of the coefficients, which should be zero.
  The end result is that the approximation of a function is often improved
  by thresholding the values of the coefficients, that is to say, either
  zeroing or shrinking the value of any very small coefficients.
@@ -854,7 +947,7 @@ When expanding a function in a wavelet basis, it can be seen that only a
 \end_layout
 
 \begin_layout Standard
-In local thresholding individual coefficients are thresholded.
+In local thresholding, individual coefficients are thresholded.
  The thresholding function can be hard, where the coefficients are set to
  zero if they are under a predetermined value 
 \begin_inset Formula $t$
@@ -922,13 +1015,13 @@ key "Chang00"
 \end_inset
 
  have also been proposed for the stationary case.
- Rigorously theoretically grounded methods for optimizing the resolution
- given a non-stationary distribution have not been proposed to the extent
- of our knowledge.
+ Rigorous theoretically grounded methods for optimizing the resolution given
+ a non-stationary distribution have not been proposed to the extent of our
+ knowledge.
 \end_layout
 
 \begin_layout Standard
-In global thresholding entire 
+In global thresholding, entire 
 \begin_inset Formula $j$
 \end_inset
 
@@ -937,8 +1030,8 @@ In global thresholding entire
  value needs to be specified.
  The computation of the optimal threshold is highly demanding and has not
  been generalized to deal with non-stationary generating functions.
- Owing to these considerations we will not go into more depth on the method
- but point the reader 
+ Owing to these considerations, we will not go into more depth on the method
+ but point the reader to 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Donoho96"
@@ -952,24 +1045,39 @@ key "Donoho96"
 \end_layout
 
 \begin_layout Subsection
-Data Streams:
+Data Streams
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Data-Streams:"
+
+\end_inset
+
+:
 \end_layout
 
 \begin_layout Standard
 Ordinarily, data is considered to be gathered at one point in time and then
  analyzed at another.
  In this fixed static data paradigm, we have complete access to the entirety
- of the data set to analyze together.
+ of the data set to analyze at any point in time.
  Furthermore, the amount of data in the set is ordinarily sufficiently small
  to analyze together without major computational difficulties occurring.
  In contrast, when analyzing a data stream it is frequently desirable to
  take new data points into the model as they arrive in real time using online
- processing.
+ processing 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Babcock02"
+
+\end_inset
+
+.
  The total data set can be unwieldy in size, so typically only a subset
  is analyzed at a given point in time.
  Data streams thus present difficulties both in terms of memory management
- owing to their potentially unlimited size and algorithmic efficiency since
- a new estimate must be ready before the next set of data comes in.
+ owing to their potentially unlimited size and the necessity for algorithmic
+ efficiency since a new estimate must be ready before the next set of data
+ comes in.
  Wegman and Caudle 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -1082,7 +1190,21 @@ key "Trevino12"
 \begin_inset Formula $n+1$
 \end_inset
 
- are given below.
+ are given in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Decay Update"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Window update"
+
+\end_inset
+
+.
  
 \end_layout
 
